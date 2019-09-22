@@ -13,9 +13,6 @@ function Nav() {
         <li>
           <a href="/add_order">Добавить заказ</a>
         </li>
-        <li>
-          <a href="/admin/app/">Админка</a>
-        </li>
       </ul>
     </nav>
   )
