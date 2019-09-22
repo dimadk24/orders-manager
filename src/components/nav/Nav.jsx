@@ -2,6 +2,7 @@ import React from 'react'
 import './Nav.css'
 import '../../assets/fontello/css/fontello.css'
 import Button from '../button'
+import { Link } from '@reach/router'
 
 function Nav() {
   return (
@@ -11,7 +12,7 @@ function Nav() {
       </Button>
       <ul className="menu">
         <li>
-          <a href="/add_order">Добавить заказ</a>
+          <Link to="/">Добавить заказ</Link>
         </li>
       </ul>
     </nav>
