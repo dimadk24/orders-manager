@@ -57,11 +57,11 @@ module.exports = {
     'import/order': 'off',
     'react-redux/prefer-separate-component-file': 'off',
     'react/no-unused-prop-types': 'off',
-  //  this doesn't mean we allow unused prop types.
-  //  we need to disable this rule to allow prop types,
-  //  which are used only in mapDispatchToProps or mapStateToProps.
-  //  this rule reports them as unused, what is incorrect.
-  //  Currently unused prop types are reported by react-redux plugin.
-  //  Which can correctly handle such case.
+    //  this doesn't mean we allow unused prop types.
+    //  we need to disable this rule to allow prop types,
+    //  which are used only in mapDispatchToProps or mapStateToProps.
+    //  this rule reports them as unused, what is incorrect.
+    //  Currently unused prop types are reported by react-redux plugin.
+    //  Which can correctly handle such case.
   },
 }
