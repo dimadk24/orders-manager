@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App } from './App'
+import { AddOrderPage } from './AddOrderPage'
 
-describe('App', () => {
+describe('AddOrderPage', () => {
   const container = document.createElement('div')
   document.body.appendChild(container)
   const defaultProps = {
@@ -16,7 +16,7 @@ describe('App', () => {
       ...defaultProps,
       ...props,
     }
-    ReactDOM.render(<App {...localProps} />, container)
+    ReactDOM.render(<AddOrderPage {...localProps} />, container)
   }
 
   function querySelectorAll(...params) {
