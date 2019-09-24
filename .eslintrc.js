@@ -64,5 +64,7 @@ module.exports = {
     //  Currently unused prop types are reported by react-redux plugin.
     //  Which can correctly handle such case.
     'prettier/prettier': 'warn',
+    //  we allow 0 warnings, so don't think prettier rules are ignored
+    // this is only to show prettier issues as warnings, not errors
   },
 }
