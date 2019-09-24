@@ -14,6 +14,9 @@ function Nav() {
         <li>
           <Link to="/">Добавить заказ</Link>
         </li>
+        <li>
+          <Link to="/search">Поиск</Link>
+        </li>
       </ul>
     </nav>
   )
