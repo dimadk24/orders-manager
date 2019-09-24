@@ -7,6 +7,7 @@ import OrderData from '../../order-data'
 import { selectProducts } from '../../../selectors/product_selectors'
 import { addProduct } from '../../../actions'
 import { connect } from 'react-redux'
+import './AddOrderPage.css'
 
 const AddOrderPage = ({ products, onAddProduct }) => {
   return (
