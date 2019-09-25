@@ -5,12 +5,9 @@ import './LabelledInput.css'
 
 const LabelledInput = ({
   inputClassName,
-  type,
-  defaultValue,
   renderInput,
   label,
   labelClassName,
-  onChange,
   invalid,
   centered,
   ...other
@@ -31,13 +28,7 @@ const LabelledInput = ({
       {renderInput ? (
         renderInput()
       ) : (
-        <input
-          type={type}
-          defaultValue={defaultValue}
-          className={inputClasses}
-          onChange={(e) => onChange(e)}
-          {...other}
-        />
+        <input className={inputClasses} {...other} />
       )}
     </label>
   )
@@ -47,21 +38,15 @@ LabelledInput.propTypes = {
   label: PropTypes.node.isRequired,
   labelClassName: PropTypes.string,
   inputClassName: PropTypes.string,
-  type: PropTypes.string,
-  defaultValue: PropTypes.string,
   renderInput: PropTypes.func,
-  onChange: PropTypes.func,
   invalid: PropTypes.bool,
   centered: PropTypes.bool,
 }
 
 LabelledInput.defaultProps = {
-  type: 'text',
   labelClassName: '',
   inputClassName: '',
-  defaultValue: '',
   renderInput: null,
-  onChange: () => {},
   invalid: false,
   centered: false,
 }
