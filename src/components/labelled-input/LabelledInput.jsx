@@ -35,7 +35,7 @@ const LabelledInput = ({
           type={type}
           defaultValue={defaultValue}
           className={inputClasses}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
           {...other}
         />
       )}
