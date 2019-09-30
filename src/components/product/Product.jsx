@@ -63,13 +63,11 @@ function Product({
       <LabelledInput
         label="Закупочная цена товара"
         labelClassName="product__option"
-        required
         centered
       />
       <LabelledInput
         label="Цена товара"
         labelClassName="product__option"
-        required
         centered
       />
       <LabelledInput
