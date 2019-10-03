@@ -12,6 +12,9 @@ const initialState = {
 }
 
 function getMaximumProductId(products) {
+  if (!products.length) {
+    return 0
+  }
   const ids = products.map((product) => product.id)
   return Math.max(...ids)
 }

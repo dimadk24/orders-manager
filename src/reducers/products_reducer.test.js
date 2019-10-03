@@ -86,6 +86,10 @@ describe('chooseTypeReducer', () => {
 })
 
 describe('getMaximumProductId', () => {
+  it('returns 0 if array of products is empty', () => {
+    expect(getMaximumProductId([])).toBe(0)
+  })
+
   it('returns maximum product id for 1 product', () => {
     expect(getMaximumProductId([createMockProduct(1)])).toBe(1)
   })
