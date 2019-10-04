@@ -5,7 +5,7 @@ import LabelledInput from '../labelled-input'
 import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
 import Button from '../button'
-import ProductParameter from '../product-parameter'
+import ProductParameter from './product-parameter'
 import { removeProduct, chooseProductType } from '../../actions'
 import { connect } from 'react-redux'
 import {

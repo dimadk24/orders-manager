@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import LabelledInput from '../labelled-input'
+import LabelledInput from '../../labelled-input'
 
 const ProductParameter = ({ options, onChange, ...other }) => {
   const [showDefaultValue, setShowDefaultValue] = useState(true)
