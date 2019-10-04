@@ -20,13 +20,20 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: node_modules
-  lint:
+  lint-code:
     executor: ci-executor
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: yarn lint
+      - run: yarn lint:code
+  lint-commits:
+    executor: ci-executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: yarn lint:commits
   test:
     executor: ci-executor
     steps:
@@ -39,7 +46,10 @@ workflows:
   build:
     jobs:
       - install-dependencies
-      - lint:
+      - lint-commits:
+          requires:
+            - install-dependencies
+      - lint-code:
           requires:
             - install-dependencies
       - test:
