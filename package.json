@@ -28,9 +28,10 @@
     "eject": "react-scripts eject",
     "format": "prettier --write \"./**/*.{js,jsx,json,css,yml}\"",
     "lint:js": "eslint \"src/**/*.{js,jsx}\" \".storybook/**/*.js\" --max-warnings=0",
-    "lint:css": "stylelint \"src/**/*.{css,sass,scss}\"",
+    "lint:styles": "stylelint \"src/**/*.{css,sass,scss}\"",
+    "lint:code": "yarn lint:js && yarn lint:styles",
     "lint:commits": "commitlint --from origin/master --to HEAD",
-    "lint": "yarn lint:js && yarn lint:css && yarn lint:commits",
+    "lint": "yarn lint:code && yarn lint:commits",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
