@@ -2,13 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Product } from './Product'
 import { OPTIONS_MODES } from '../../models/product_model'
+import { Formik } from 'formik'
 
 describe('Product', () => {
   const container = document.createElement('div')
   document.body.appendChild(container)
 
   function render(props) {
-    ReactDOM.render(<Product id={1} {...props} />, container)
+    ReactDOM.render(
+      <Formik onSubmit={() => {}} initialValues={{}}>
+        <Product id={1} {...props} />
+      </Formik>,
+      container
+    )
   }
 
   function querySelectorAll(...params) {

@@ -14,6 +14,7 @@ import {
   selectOptionsMode,
 } from '../../selectors/product_selectors'
 import { OPTIONS_MODES } from '../../models/product_model'
+import ProductOption from './product-option'
 
 function Product({
   onRemove,
@@ -21,7 +22,10 @@ function Product({
   onChooseProductType,
   optionsMode,
   parameters,
+  id,
 }) {
+  const productFormPath = `products[${id}]`
+
   return (
     <section className="product">
       <div className="product__close-wrapper">
@@ -38,10 +42,10 @@ function Product({
       <span className="product__type">Тип товара</span>
       {optionsMode === OPTIONS_MODES.TYPES && (
         <section className="product__types">
-          {types.map(({ id, value }) => (
+          {types.map(({ id: typeId, value }) => (
             <ProductTypeButton
-              key={id}
-              onClick={() => onChooseProductType({ id, value })}
+              key={typeId}
+              onClick={() => onChooseProductType({ id: typeId, value })}
             >
               {value}
             </ProductTypeButton>
@@ -60,30 +64,28 @@ function Product({
           ))}
         </section>
       )}
-      <LabelledInput
+      <ProductOption
         label="Закупочная цена товара"
-        labelClassName="product__option"
-        centered
-      />
-      <LabelledInput
-        label="Цена товара"
-        labelClassName="product__option"
-        centered
-      />
-      <LabelledInput
-        label="Количество товаров"
-        labelClassName="product__option"
-        defaultValue="1"
+        name={`${productFormPath}.purchasePrice`}
         type="number"
-        centered
       />
-      <LabelledInput
+      <ProductOption
+        label="Цена товара"
+        name={`${productFormPath}.price`}
+        type="number"
+      />
+      <ProductOption
+        label="Количество товаров"
+        name={`${productFormPath}.number`}
+        type="number"
+      />
+      <ProductOption
         label="Комментарий"
-        labelClassName="product__option"
+        name={`${productFormPath}.comment`}
+        type="number"
         renderInput={() => (
           <textarea cols="30" rows="3" className="product__comment" />
         )}
-        centered
       />
     </section>
   )

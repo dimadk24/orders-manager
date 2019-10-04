@@ -8,8 +8,22 @@ import { selectProducts } from '../../../selectors/product_selectors'
 import { addProduct } from '../../../actions'
 import { connect } from 'react-redux'
 import './AddOrderPage.css'
+import { Form, Formik } from 'formik'
 
 const AddOrderPage = ({ products, onAddProduct }) => {
+  const formInitialValues = {
+    products: {
+      1: {
+        name: '',
+        type: 0,
+        purchasePrice: 0,
+        price: 0,
+        number: 1,
+        comment: '',
+        parameters: [],
+      },
+    },
+  }
   return (
     <>
       <h1 className="order-id-wrapper">
@@ -21,20 +35,27 @@ const AddOrderPage = ({ products, onAddProduct }) => {
         />
       </h1>
       <main>
-        <section className="main-content-wrapper">
-          <div className="products">
-            {products.map(({ id }) => (
-              <ConnectedProduct key={id} id={id} />
-            ))}
-          </div>
-          <Button className="btn-add-product" onClick={() => onAddProduct()}>
-            +
-          </Button>
-          <Button className="btn-save-order">Сохранить заказ</Button>
-        </section>
-        <aside>
-          <OrderData />
-        </aside>
+        <Formik initialValues={formInitialValues} onSubmit={() => {}}>
+          <Form className="form-wrapper">
+            <section className="main-content-wrapper">
+              <div className="products">
+                {products.map(({ id }) => (
+                  <ConnectedProduct key={id} id={id} />
+                ))}
+              </div>
+              <Button
+                className="btn-add-product"
+                onClick={() => onAddProduct()}
+              >
+                +
+              </Button>
+              <Button className="btn-save-order">Сохранить заказ</Button>
+            </section>
+            <aside>
+              <OrderData />
+            </aside>
+          </Form>
+        </Formik>
       </main>
     </>
   )
