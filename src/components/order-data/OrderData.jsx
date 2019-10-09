@@ -1,11 +1,11 @@
 import React from 'react'
-import './CustomerData.css'
+import './OrderData.css'
 import LabelledInput from '../labelled-input'
 import LabelledDateInput from '../labelled-date-input'
 
-function CustomerData() {
+function OrderData() {
   return (
-    <div className="customer-data">
+    <div className="order-data">
       <LabelledDateInput label="Дата заказа" />
       <LabelledDateInput label="Дата доставки" />
       <LabelledInput label="Время доставки" />
@@ -49,4 +49,4 @@ function CustomerData() {
   )
 }
 
-export default CustomerData
+export default OrderData

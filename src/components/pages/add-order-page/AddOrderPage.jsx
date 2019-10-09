@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import LabelledInput from '../../labelled-input'
 import ConnectedProduct from '../../product'
 import Button from '../../button'
-import CustomerData from '../../customer-data'
+import OrderData from '../../order-data'
 import { selectProducts } from '../../../selectors/product_selectors'
 import { addProduct } from '../../../actions'
 import { connect } from 'react-redux'
@@ -32,7 +32,7 @@ const AddOrderPage = ({ products, onAddProduct }) => {
           <Button className="btn-save-order">Сохранить заказ</Button>
         </section>
         <aside>
-          <CustomerData />
+          <OrderData />
         </aside>
       </main>
     </>

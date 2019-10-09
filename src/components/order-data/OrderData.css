@@ -1,19 +1,19 @@
-.customer-data {
+.order-data {
   width: 350px;
   max-width: 90%;
   display: flex;
   flex-direction: column;
 }
 
-.customer-data label {
+.order-data label {
   margin-bottom: 5px;
 }
 
-.customer-data label:last-child {
+.order-data label:last-child {
   margin-bottom: 0;
 }
 
-.customer-data .comment-area {
+.order-data .comment-area {
   width: 150px;
   padding: 5px;
   border-radius: 4px;
@@ -22,7 +22,7 @@
 }
 
 @media (min-width: 1121px) {
-  .customer-data {
+  .order-data {
     position: fixed;
     top: 50px;
     right: 0;
@@ -30,7 +30,7 @@
 }
 
 @media (max-width: 1120px) {
-  .customer-data {
+  .order-data {
     margin-bottom: 20px;
   }
 }
