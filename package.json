@@ -28,8 +28,10 @@
     "eject": "react-scripts eject",
     "format": "prettier --write \"./**/*.{js,jsx,json,css,yml}\"",
     "lint:js": "eslint \"src/**/*.{js,jsx}\" \".storybook/**/*.js\" --max-warnings=0",
-    "lint:css": "stylelint \"src/**/*.{css,sass,scss}\"",
-    "lint": "yarn lint:js && yarn lint:css",
+    "lint:styles": "stylelint \"src/**/*.{css,sass,scss}\"",
+    "lint:code": "yarn lint:js && yarn lint:styles",
+    "lint:commits": "commitlint --from origin/master --to HEAD",
+    "lint": "yarn lint:code && yarn lint:commits",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -46,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/addon-links": "^5.2.1",
     "@storybook/addon-notes": "^5.2.1",
