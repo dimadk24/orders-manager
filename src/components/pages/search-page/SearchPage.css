@@ -1,0 +1,36 @@
+.search-page-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-row-gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.search-page-form-field {
+  margin: 0;
+}
+
+.search-page-form-submit-button {
+  width: 50%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+@media (max-width: 980px) {
+  .search-page-form-field {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-page-form {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+
+  .search-page-form-field {
+    width: 166px;
+  }
+}
