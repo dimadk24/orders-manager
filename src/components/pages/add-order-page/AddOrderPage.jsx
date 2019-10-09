@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import LabelledInput from '../../labelled-input'
 import ConnectedProduct from '../../product'
-import Button from '../../button'
 import OrderData from '../../order-data'
 import { selectProducts } from '../../../selectors/product_selectors'
 import { addProduct } from '../../../actions'
 import { connect } from 'react-redux'
+import AddIcon from '@material-ui/icons/Add'
+import Fab from '@material-ui/core/Fab'
+import SaveIcon from '@material-ui/icons/Save'
 
 const AddOrderPage = ({ products, onAddProduct }) => {
   return (
@@ -26,10 +28,14 @@ const AddOrderPage = ({ products, onAddProduct }) => {
               <ConnectedProduct key={id} id={id} />
             ))}
           </div>
-          <Button className="btn-add-product" onClick={() => onAddProduct()}>
-            +
-          </Button>
-          <Button className="btn-save-order">Сохранить заказ</Button>
+          <Fab onClick={() => onAddProduct()} color="secondary">
+            <AddIcon />
+          </Fab>
+          <div className="save-button-wrapper">
+            <Fab variant="extended" color="primary">
+              <SaveIcon />
+            </Fab>
+          </div>
         </section>
         <aside>
           <OrderData />
