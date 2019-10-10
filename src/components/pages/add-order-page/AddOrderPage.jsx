@@ -34,7 +34,8 @@ const AddOrderPage = ({ products, onAddProduct }) => {
           </Fab>
           <div className="save-button-wrapper">
             <Fab variant="extended" color="primary">
-              <SaveIcon />
+              <SaveIcon className="save-button-icon" />
+              <span className="save-button-text">Сохранить заказ</span>
             </Fab>
           </div>
         </section>

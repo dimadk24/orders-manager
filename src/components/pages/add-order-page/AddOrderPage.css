@@ -23,6 +23,16 @@ main {
   width: 100%;
 }
 
+.save-button-wrapper {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.save-button-icon {
+  margin-right: 5px;
+}
+
 @media (max-width: 1120px) {
   main {
     flex-direction: column-reverse;
@@ -31,6 +41,10 @@ main {
 
   .main-content-wrapper {
     width: 80%;
+  }
+
+  .save-button-text {
+    display: none;
   }
 }
 
