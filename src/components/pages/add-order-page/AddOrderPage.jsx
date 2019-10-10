@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import AddIcon from '@material-ui/icons/Add'
 import Fab from '@material-ui/core/Fab'
 import SaveIcon from '@material-ui/icons/Save'
+import './AddOrderPage.css'
 
 const AddOrderPage = ({ products, onAddProduct }) => {
   return (
