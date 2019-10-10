@@ -2,9 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Product.css'
 import LabelledInput from '../labelled-input'
-import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
-import Button from '../button'
 import ProductParameter from '../product-parameter'
 import { removeProduct, chooseProductType } from '../../actions'
 import { connect } from 'react-redux'
@@ -14,6 +12,8 @@ import {
   selectOptionsMode,
 } from '../../selectors/product_selectors'
 import { OPTIONS_MODES } from '../../models/product_model'
+import CloseIcon from '@material-ui/icons/Close'
+import Button from '@material-ui/core/Button'
 
 function Product({
   onRemove,
@@ -25,8 +25,8 @@ function Product({
   return (
     <section className="product">
       <div className="product__close-wrapper">
-        <Button className="product__close-button" onClick={() => onRemove()}>
-          <i className="icon-close" />
+        <Button onClick={() => onRemove()}>
+          <CloseIcon />
         </Button>
       </div>
       <LabelledInput

@@ -11,13 +11,6 @@
   text-align: right;
 }
 
-.product__close-button {
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  font-size: 2em;
-}
-
 .product__name-input {
   width: 350px;
   max-width: 95%;
