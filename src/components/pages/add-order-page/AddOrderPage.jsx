@@ -29,6 +29,7 @@ const AddOrderPage = ({ products, onAddProduct }) => {
               <ConnectedProduct key={id} id={id} />
             ))}
           </div>
+          {/* TODO: remove Fab here */}
           <Fab onClick={() => onAddProduct()} color="secondary">
             <AddIcon />
           </Fab>

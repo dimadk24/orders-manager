@@ -1,24 +1,35 @@
 import React from 'react'
 import './Nav.css'
-import '../../assets/fontello/css/fontello.css'
-import Button from '../button'
-import { Link } from '@reach/router'
+import { Link as RouterLink } from '@reach/router'
+import MenuIcon from '@material-ui/icons/Menu'
+import IconButton from '@material-ui/core/IconButton'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import AppBar from '@material-ui/core/AppBar'
+import Link from '@material-ui/core/Link'
 
 function Nav() {
   return (
-    <nav className="nav" id="nav">
-      <Button className="btn-menu-toggle">
-        <i className="icon-menu" />
-      </Button>
-      <ul className="menu">
-        <li>
-          <Link to="/">Добавить заказ</Link>
-        </li>
-        <li>
+    <AppBar position="fixed">
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className="btn-menu-toggle"
+          color="inherit"
+          aria-label="menu"
+        >
+          <MenuIcon />
+        </IconButton>
+        {/*<Typography variant="h6" className="menu-link">*/}
+          <Link component={RouterLink} to="/">
+            Добавить заказ
+          </Link>
+        {/*</Typography>*/}
+        <Typography variant="h6" className="menu-link">
           <Link to="/search">Поиск</Link>
-        </li>
-      </ul>
-    </nav>
+        </Typography>
+      </Toolbar>
+    </AppBar>
   )
 }
 

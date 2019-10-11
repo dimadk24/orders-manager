@@ -79,8 +79,9 @@
     margin-top: 55px;
   }
 
-  .btn-menu-toggle {
+  button.btn-menu-toggle {
     display: block;
+    color: white;
   }
 
   .btn-menu-toggle:focus {
