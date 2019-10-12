@@ -3,11 +3,23 @@ const OPTIONS_MODES = {
   PARAMETERS: 'parameters',
 }
 
-const createProduct = ({ id, optionsMode = OPTIONS_MODES.TYPES, type }) => ({
+const createProduct = ({ id }) => ({
   id,
-  optionsMode,
-  type,
+  name: '',
+  type: {
+    id: 0,
+    value: '',
+  },
+  purchasePrice: 0,
+  price: 0,
+  amount: 1,
+  comment: '',
+  parameters: [],
 })
+
+const getProductArrayIndex = (products, id) => {
+  return products.findIndex((product) => product.id === id)
+}
 
 const mockProductTypes = [
   { id: 1, value: 'одеяло' },
@@ -75,6 +87,10 @@ const mockProductParameters = [
   },
 ]
 
-export default createProduct
-
-export { mockProductTypes, mockProductParameters, OPTIONS_MODES }
+export {
+  createProduct,
+  getProductArrayIndex,
+  mockProductTypes,
+  mockProductParameters,
+  OPTIONS_MODES,
+}

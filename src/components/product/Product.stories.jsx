@@ -62,7 +62,7 @@ const parameters = [
 ]
 
 const commonProps = {
-  id: 1,
+  index: 1,
   onRemove: action('removed'),
 }
 

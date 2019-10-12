@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import Nav from '../nav'
-import ConnectedAddOrderPage from '../pages/add-order-page'
+import AddOrderPage from '../pages/add-order-page/AddOrderPage'
 import { Router } from '@reach/router'
 import SearchPage from '../pages/search-page'
 
@@ -11,7 +11,7 @@ function App() {
       <Nav />
       <div className="container">
         <Router>
-          <ConnectedAddOrderPage path="/" />
+          <AddOrderPage path="/" />
           <SearchPage path="/search" />
         </Router>
       </div>

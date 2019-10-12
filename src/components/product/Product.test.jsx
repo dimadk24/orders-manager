@@ -11,7 +11,7 @@ describe('Product', () => {
   function render(props) {
     ReactDOM.render(
       <Formik onSubmit={() => {}} initialValues={{}}>
-        <Product id={1} {...props} />
+        <Product index={1} {...props} />
       </Formik>,
       container
     )

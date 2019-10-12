@@ -1,5 +1,6 @@
 import { ADD_PRODUCT, REMOVE_PRODUCT, CHOOSE_PRODUCT_TYPE } from '../actions'
-import createProduct, {
+import {
+  createProduct,
   mockProductParameters,
   mockProductTypes,
   OPTIONS_MODES,

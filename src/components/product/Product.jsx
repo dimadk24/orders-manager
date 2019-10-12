@@ -6,12 +6,10 @@ import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
 import Button from '../button'
 import ProductParameter from './product-parameter'
-import { removeProduct, chooseProductType } from '../../actions'
 import { connect } from 'react-redux'
 import {
   selectMockParameters,
   selectMockTypes,
-  selectOptionsMode,
 } from '../../selectors/product_selectors'
 import { OPTIONS_MODES } from '../../models/product_model'
 import ProductOption from './product-option'
@@ -19,12 +17,12 @@ import ProductOption from './product-option'
 function Product({
   onRemove,
   types,
+  index,
   onChooseProductType,
   optionsMode,
   parameters,
-  id,
 }) {
-  const productFormPath = `products[${id}]`
+  const productFormPath = `products[${index}]`
 
   return (
     <section className="product">
@@ -42,10 +40,10 @@ function Product({
       <span className="product__type">Тип товара</span>
       {optionsMode === OPTIONS_MODES.TYPES && (
         <section className="product__types">
-          {types.map(({ id: typeId, value }) => (
+          {types.map(({ id, value }) => (
             <ProductTypeButton
-              key={typeId}
-              onClick={() => onChooseProductType({ id: typeId, value })}
+              key={id}
+              onClick={() => onChooseProductType({ id, value })}
             >
               {value}
             </ProductTypeButton>
@@ -76,7 +74,7 @@ function Product({
       />
       <ProductOption
         label="Количество товаров"
-        name={`${productFormPath}.number`}
+        name={`${productFormPath}.amount`}
         type="number"
       />
       <ProductOption
@@ -92,7 +90,7 @@ function Product({
 }
 
 Product.propTypes = {
-  id: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   onRemove: PropTypes.func,
   types: PropTypes.arrayOf(
     PropTypes.shape({
@@ -118,22 +116,12 @@ Product.defaultProps = {
   parameters: [],
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   types: selectMockTypes(state),
-  optionsMode: selectOptionsMode(state, ownProps.id),
   parameters: selectMockParameters(state),
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onRemove: () => dispatch(removeProduct(ownProps.id)),
-  onChooseProductType: (productType) =>
-    dispatch(chooseProductType(ownProps.id, productType)),
-})
-
-const ConnectedProduct = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Product)
+const ConnectedProduct = connect(mapStateToProps)(Product)
 
 export default ConnectedProduct
 export { Product }
