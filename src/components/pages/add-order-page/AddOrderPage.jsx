@@ -1,15 +1,17 @@
 import React from 'react'
 import LabelledInput from '../../labelled-input'
-import ConnectedProduct from '../../product'
+import Product from '../../product/Product'
 import Button from '../../button'
 import OrderData from '../../order-data'
 import './AddOrderPage.css'
 import { FieldArray, Form, Formik } from 'formik'
 import {
   createProduct,
+  getMaximumProductId,
   getProductArrayIndex,
+  mockProductParameters,
+  mockProductTypes,
 } from '../../../models/product_model'
-import { getMaximumProductId } from '../../../reducers/products_reducer'
 
 const AddOrderPage = () => {
   const formInitialValues = {
@@ -33,9 +35,11 @@ const AddOrderPage = () => {
           <>
             <div className="products">
               {products.map(({ id }, index) => (
-                <ConnectedProduct
+                <Product
                   key={id}
                   index={index}
+                  types={mockProductTypes}
+                  parameters={mockProductParameters}
                   onRemove={() => onRemoveProduct(id)}
                 />
               ))}
@@ -60,11 +64,7 @@ const AddOrderPage = () => {
         />
       </h1>
       <main>
-        <Formik
-          initialValues={formInitialValues}
-          onSubmit={() => {}}
-          validate={(values) => console.log(values)}
-        >
+        <Formik initialValues={formInitialValues} onSubmit={() => {}}>
           {({ values }) => {
             return (
               <Form className="form-wrapper">

@@ -6,11 +6,6 @@ import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
 import Button from '../button'
 import ProductParameter from './product-parameter'
-import { connect } from 'react-redux'
-import {
-  selectMockParameters,
-  selectMockTypes,
-} from '../../selectors/product_selectors'
 import { OPTIONS_MODES } from '../../models/product_model'
 import ProductOption from './product-option'
 
@@ -116,12 +111,4 @@ Product.defaultProps = {
   parameters: [],
 }
 
-const mapStateToProps = (state) => ({
-  types: selectMockTypes(state),
-  parameters: selectMockParameters(state),
-})
-
-const ConnectedProduct = connect(mapStateToProps)(Product)
-
-export default ConnectedProduct
-export { Product }
+export default Product

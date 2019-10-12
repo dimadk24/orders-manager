@@ -21,6 +21,14 @@ const getProductArrayIndex = (products, id) => {
   return products.findIndex((product) => product.id === id)
 }
 
+function getMaximumProductId(products) {
+  if (!products.length) {
+    return 0
+  }
+  const ids = products.map((product) => product.id)
+  return Math.max(...ids)
+}
+
 const mockProductTypes = [
   { id: 1, value: 'одеяло' },
   { id: 2, value: 'подушка' },
@@ -90,6 +98,7 @@ const mockProductParameters = [
 export {
   createProduct,
   getProductArrayIndex,
+  getMaximumProductId,
   mockProductTypes,
   mockProductParameters,
   OPTIONS_MODES,
