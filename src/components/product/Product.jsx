@@ -5,23 +5,20 @@ import LabelledInput from '../labelled-input'
 import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
 import Button from '../button'
-import ProductParameter from '../product-parameter'
-import { removeProduct, chooseProductType } from '../../actions'
-import { connect } from 'react-redux'
-import {
-  selectMockParameters,
-  selectMockTypes,
-  selectOptionsMode,
-} from '../../selectors/product_selectors'
+import ProductParameter from './product-parameter'
 import { OPTIONS_MODES } from '../../models/product_model'
+import ProductOption from './product-option'
 
 function Product({
   onRemove,
   types,
+  index,
   onChooseProductType,
   optionsMode,
   parameters,
 }) {
+  const productFormPath = `products[${index}]`
+
   return (
     <section className="product">
       <div className="product__close-wrapper">
@@ -55,44 +52,39 @@ function Product({
               options={parameter.options}
               label={parameter.name}
               key={parameter.name}
-              labelClassName="product__parameter"
             />
           ))}
         </section>
       )}
-      <LabelledInput
+      <ProductOption
         label="Закупочная цена товара"
-        labelClassName="product__option"
-        required
-        centered
-      />
-      <LabelledInput
-        label="Цена товара"
-        labelClassName="product__option"
-        required
-        centered
-      />
-      <LabelledInput
-        label="Количество товаров"
-        labelClassName="product__option"
-        defaultValue="1"
+        name={`${productFormPath}.purchasePrice`}
         type="number"
-        centered
       />
-      <LabelledInput
+      <ProductOption
+        label="Цена товара"
+        name={`${productFormPath}.price`}
+        type="number"
+      />
+      <ProductOption
+        label="Количество товаров"
+        name={`${productFormPath}.amount`}
+        type="number"
+      />
+      <ProductOption
         label="Комментарий"
-        labelClassName="product__option"
+        name={`${productFormPath}.comment`}
+        type="number"
         renderInput={() => (
           <textarea cols="30" rows="3" className="product__comment" />
         )}
-        centered
       />
     </section>
   )
 }
 
 Product.propTypes = {
-  id: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   onRemove: PropTypes.func,
   types: PropTypes.arrayOf(
     PropTypes.shape({
@@ -118,22 +110,4 @@ Product.defaultProps = {
   parameters: [],
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  types: selectMockTypes(state),
-  optionsMode: selectOptionsMode(state, ownProps.id),
-  parameters: selectMockParameters(state),
-})
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onRemove: () => dispatch(removeProduct(ownProps.id)),
-  onChooseProductType: (productType) =>
-    dispatch(chooseProductType(ownProps.id, productType)),
-})
-
-const ConnectedProduct = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Product)
-
-export default ConnectedProduct
-export { Product }
+export default Product

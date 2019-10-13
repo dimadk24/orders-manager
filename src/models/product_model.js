@@ -3,11 +3,35 @@ const OPTIONS_MODES = {
   PARAMETERS: 'parameters',
 }
 
-const createProduct = ({ id, optionsMode = OPTIONS_MODES.TYPES, type }) => ({
+const createProduct = ({ id }) => ({
   id,
-  optionsMode,
-  type,
+  name: '',
+  type: {
+    id: 0,
+    value: '',
+  },
+  purchasePrice: 0,
+  price: 0,
+  amount: 1,
+  comment: '',
+  parameters: [],
 })
+
+const getProductArrayIndex = (products, id) => {
+  return products.findIndex((product) => product.id === id)
+}
+
+function getMaximumProductId(products) {
+  if (!products.length) {
+    return 0
+  }
+  const ids = products.map((product) => product.id)
+  return Math.max(...ids)
+}
+
+const getOptionsMode = (product) => {
+  return product.type.id === 0 ? OPTIONS_MODES.TYPES : OPTIONS_MODES.PARAMETERS
+}
 
 const mockProductTypes = [
   { id: 1, value: 'одеяло' },
@@ -75,6 +99,12 @@ const mockProductParameters = [
   },
 ]
 
-export default createProduct
-
-export { mockProductTypes, mockProductParameters, OPTIONS_MODES }
+export {
+  createProduct,
+  getProductArrayIndex,
+  getMaximumProductId,
+  getOptionsMode,
+  mockProductTypes,
+  mockProductParameters,
+  OPTIONS_MODES,
+}

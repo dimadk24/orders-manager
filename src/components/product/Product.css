@@ -42,14 +42,6 @@
   margin: 10px 0;
 }
 
-.product__parameter {
-  margin: 0 10px 5px 0;
-}
-
-.product__option:not(:last-of-type) {
-  margin-bottom: 15px;
-}
-
 .product__comment {
   width: 150px;
   padding: 5px;
