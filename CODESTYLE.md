@@ -107,16 +107,8 @@ Description of kebab, Pascal, camel and other cases can be found [here](https://
 - Create React functional or class component
 - Provide prop types for this component
 - \[optionally\] Create stylesheet: css or scss file `ComponentName.(css|scss)`
-and import this file into component 
+and import this file into component
 - Export **default** ComponentName from `ComponentName.jsx `file
-- Create file `index.js`, import ComponentName to this file
-and export **default** ComponentName from this file.
-This is required to shorten imports.
-With this you can import component this way, without explicit filename:
-```js
-import ComponentName from './components/component-name'
-```
-Cause webpack automagically reads `index.js` in the component folder.
 - Also, it's good to provide stories for your new awesome component.
 Get started with storybook [here](https://storybook.js.org/)
 - If you code includes any logic (except template),
@@ -282,7 +274,7 @@ describe('App', () => {
 ## Names of it blocks
 
 Do not add `should` to test names. It's just redundant.
-Because of it first verb in the name should be in the 3rd form 
+Because of it first verb in the name should be in the 3rd form
 
 Incorrect:
 ```js
@@ -292,14 +284,14 @@ it('should work', () => {
 
 it('work', () => {
   expect(true).toBe(true)
-}); 
+});
 ```
 
 Correct:
 ```js
 it('works', () => {
   expect(true).toBe(true)
-}); 
+});
 ```
 
 That's all project code style rules, that we have. Enjoy!
