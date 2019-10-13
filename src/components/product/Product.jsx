@@ -52,7 +52,6 @@ function Product({
               options={parameter.options}
               label={parameter.name}
               key={parameter.name}
-              labelClassName="product__parameter"
             />
           ))}
         </section>

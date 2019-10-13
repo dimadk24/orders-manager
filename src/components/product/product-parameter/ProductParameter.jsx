@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import LabelledInput from '../../labelled-input'
+import './ProductParameter.css'
 
 const ProductParameter = ({ options, onChange, ...other }) => {
   const [showDefaultValue, setShowDefaultValue] = useState(true)
@@ -23,7 +24,13 @@ const ProductParameter = ({ options, onChange, ...other }) => {
     </select>
   )
 
-  return <LabelledInput renderInput={() => selectInput} {...other} />
+  return (
+    <LabelledInput
+      renderInput={() => selectInput}
+      labelClassName="product__parameter"
+      {...other}
+    />
+  )
 }
 
 ProductParameter.propTypes = {
