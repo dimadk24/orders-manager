@@ -8,6 +8,7 @@ import { FieldArray, Form, Formik } from 'formik'
 import {
   createProduct,
   getMaximumProductId,
+  getOptionsMode,
   getProductArrayIndex,
   mockProductParameters,
   mockProductTypes,
@@ -18,7 +19,8 @@ const AddOrderPage = () => {
     products: [createProduct({ id: 1 })],
   }
 
-  const getProductsBlock = (products) => (
+  /* eslint-disable react/prop-types */
+  const getProductsBlock = ({ products, setFieldValue }) => (
     <FieldArray name="products">
       {({ push, remove }) => {
         const onAddProduct = () => {
@@ -31,18 +33,33 @@ const AddOrderPage = () => {
         const onRemoveProduct = (productId) =>
           remove(getProductArrayIndex(products, productId))
 
+        const onChooseProductType = ({ productIndex, typeId, value }) => {
+          const fieldName = `products[${productIndex}].type`
+          setFieldValue(fieldName, { id: typeId, value })
+        }
+
         return (
           <>
             <div className="products">
-              {products.map(({ id }, index) => (
-                <Product
-                  key={id}
-                  index={index}
-                  types={mockProductTypes}
-                  parameters={mockProductParameters}
-                  onRemove={() => onRemoveProduct(id)}
-                />
-              ))}
+              {products.map((product, index) => {
+                return (
+                  <Product
+                    key={product.id}
+                    index={index}
+                    types={mockProductTypes}
+                    parameters={mockProductParameters}
+                    optionsMode={getOptionsMode(product)}
+                    onRemove={() => onRemoveProduct(product.id)}
+                    onChooseProductType={({ id: typeId, value }) =>
+                      onChooseProductType({
+                        productIndex: index,
+                        typeId,
+                        value,
+                      })
+                    }
+                  />
+                )
+              })}
             </div>
             <Button className="btn-add-product" onClick={() => onAddProduct()}>
               +
@@ -52,6 +69,7 @@ const AddOrderPage = () => {
       }}
     </FieldArray>
   )
+  /* eslint-enable react/prop-types */
 
   return (
     <>
@@ -65,11 +83,14 @@ const AddOrderPage = () => {
       </h1>
       <main>
         <Formik initialValues={formInitialValues} onSubmit={() => {}}>
-          {({ values }) => {
+          {({ values, setFieldValue }) => {
             return (
               <Form className="form-wrapper">
                 <section className="main-content-wrapper">
-                  {getProductsBlock(values.products)}
+                  {getProductsBlock({
+                    products: values.products,
+                    setFieldValue,
+                  })}
                   <Button className="btn-save-order">Сохранить заказ</Button>
                 </section>
                 <aside>

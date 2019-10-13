@@ -29,6 +29,10 @@ function getMaximumProductId(products) {
   return Math.max(...ids)
 }
 
+const getOptionsMode = (product) => {
+  return product.type.id === 0 ? OPTIONS_MODES.TYPES : OPTIONS_MODES.PARAMETERS
+}
+
 const mockProductTypes = [
   { id: 1, value: 'одеяло' },
   { id: 2, value: 'подушка' },
@@ -99,6 +103,7 @@ export {
   createProduct,
   getProductArrayIndex,
   getMaximumProductId,
+  getOptionsMode,
   mockProductTypes,
   mockProductParameters,
   OPTIONS_MODES,
