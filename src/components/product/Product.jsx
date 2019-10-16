@@ -21,6 +21,19 @@ function Product({
 }) {
   const productFormPath = `products[${index}]`
 
+  const getTypesBlock = () => (
+    <section className="product__types">
+      {types.map(({ id, value }) => (
+        <ProductTypeButton
+          key={id}
+          onClick={() => onChooseProductType({ id, value })}
+        >
+          {value}
+        </ProductTypeButton>
+      ))}
+    </section>
+  )
+
   const getParametersBlock = () => (
     <section className="product__parameters">
       <FieldArray name={`${productFormPath}.parameters`}>
@@ -62,18 +75,7 @@ function Product({
         centered
       />
       <span className="product__type">Тип товара</span>
-      {optionsMode === OPTIONS_MODES.TYPES && (
-        <section className="product__types">
-          {types.map(({ id, value }) => (
-            <ProductTypeButton
-              key={id}
-              onClick={() => onChooseProductType({ id, value })}
-            >
-              {value}
-            </ProductTypeButton>
-          ))}
-        </section>
-      )}
+      {optionsMode === OPTIONS_MODES.TYPES && getTypesBlock()}
       {optionsMode === OPTIONS_MODES.PARAMETERS && getParametersBlock()}
       <ProductOption
         label="Закупочная цена товара"
