@@ -116,12 +116,14 @@ Product.propTypes = {
   onChooseProductType: PropTypes.func,
   optionsMode: PropTypes.oneOf([OPTIONS_MODES.TYPES, OPTIONS_MODES.PARAMETERS]),
   parameters: PropTypes.arrayOf(
+    // loaded parameters from backend. From this prop we get parameters
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       options: ProductParameter.propTypes.options,
     })
   ),
   formParameters: PropTypes.arrayOf(
+    // parameters from Formik. To this prop we add parameters.
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
