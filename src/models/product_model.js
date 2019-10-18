@@ -5,7 +5,6 @@ const OPTIONS_MODES = {
 
 const createProduct = ({ id }) => ({
   id,
-  name: '',
   type: {
     id: 0,
     value: '',
