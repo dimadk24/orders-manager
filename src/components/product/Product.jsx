@@ -17,7 +17,7 @@ function Product({
   onChooseProductType,
   optionsMode,
   parameters,
-  formParameters,
+  formValues,
 }) {
   const productFormPath = `products[${index}]`
 
@@ -39,7 +39,7 @@ function Product({
       <FieldArray name={`${productFormPath}.parameters`}>
         {({ push, replace }) => {
           const onChooseParameter = ({ name, value }) => {
-            const foundItemIndex = formParameters.findIndex(
+            const foundItemIndex = formValues.parameters.findIndex(
               (parameter) => parameter.name === name
             )
             if (foundItemIndex === -1) push({ name, value })
@@ -116,19 +116,15 @@ Product.propTypes = {
   onChooseProductType: PropTypes.func,
   optionsMode: PropTypes.oneOf([OPTIONS_MODES.TYPES, OPTIONS_MODES.PARAMETERS]),
   parameters: PropTypes.arrayOf(
-    // loaded parameters from backend. From this prop we get parameters
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       options: ProductParameter.propTypes.options,
     })
   ),
-  formParameters: PropTypes.arrayOf(
-    // parameters from Formik. To this prop we add parameters.
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
+  // eslint-disable-next-line react/forbid-prop-types
+  formValues: PropTypes.object, // product Formik object
+  // See createProduct function in product_model.js
+  // and initialValues passed to Formik in the page
 }
 
 Product.defaultProps = {
@@ -137,7 +133,13 @@ Product.defaultProps = {
   onChooseProductType: () => {},
   optionsMode: OPTIONS_MODES.TYPES,
   parameters: [],
-  formParameters: [],
+  formValues: {
+    type: {
+      id: 0,
+      value: '',
+    },
+    parameters: [],
+  },
 }
 
 export default Product
