@@ -33,6 +33,11 @@ const getOptionsMode = (product) => {
   return product.type.id === 0 ? OPTIONS_MODES.TYPES : OPTIONS_MODES.PARAMETERS
 }
 
+const createProductName = ({ type, parameters }) => {
+  const parametersValues = parameters.map((parameter) => parameter.value)
+  return `${type.value} ${parametersValues.join(' ')}`.trim()
+}
+
 const mockProductTypes = [
   { id: 1, value: 'одеяло' },
   { id: 2, value: 'подушка' },
@@ -104,6 +109,7 @@ export {
   getProductArrayIndex,
   getMaximumProductId,
   getOptionsMode,
+  createProductName,
   mockProductTypes,
   mockProductParameters,
   OPTIONS_MODES,

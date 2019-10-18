@@ -6,7 +6,7 @@ import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
 import Button from '../button'
 import ProductParameter from './product-parameter'
-import { OPTIONS_MODES } from '../../models/product_model'
+import { createProductName, OPTIONS_MODES } from '../../models/product_model'
 import ProductOption from './product-option'
 import { FieldArray } from 'formik'
 
@@ -71,6 +71,10 @@ function Product({
       <LabelledInput
         label="Имя товара"
         inputClassName="product__name-input"
+        value={createProductName({
+          type: formValues.type,
+          parameters: formValues.parameters,
+        })}
         disabled
         centered
       />
