@@ -8,6 +8,7 @@ import Button from '../button'
 import ProductParameter from './product-parameter'
 import { OPTIONS_MODES } from '../../models/product_model'
 import ProductOption from './product-option'
+import { FieldArray } from 'formik'
 
 function Product({
   onRemove,
@@ -16,8 +17,49 @@ function Product({
   onChooseProductType,
   optionsMode,
   parameters,
+  formParameters,
 }) {
   const productFormPath = `products[${index}]`
+
+  const getTypesBlock = () => (
+    <section className="product__types">
+      {types.map(({ id, value }) => (
+        <ProductTypeButton
+          key={id}
+          onClick={() => onChooseProductType({ id, value })}
+        >
+          {value}
+        </ProductTypeButton>
+      ))}
+    </section>
+  )
+
+  const getParametersBlock = () => (
+    <section className="product__parameters">
+      <FieldArray name={`${productFormPath}.parameters`}>
+        {({ push, replace }) => {
+          const onChooseParameter = ({ name, value }) => {
+            const foundItemIndex = formParameters.findIndex(
+              (parameter) => parameter.name === name
+            )
+            if (foundItemIndex === -1) push({ name, value })
+            else replace(foundItemIndex, { name, value })
+          }
+
+          return parameters.map((parameter) => (
+            <ProductParameter
+              options={parameter.options}
+              label={parameter.name}
+              key={parameter.name}
+              onChange={(value) =>
+                onChooseParameter({ name: parameter.name, value })
+              }
+            />
+          ))
+        }}
+      </FieldArray>
+    </section>
+  )
 
   return (
     <section className="product">
@@ -33,29 +75,8 @@ function Product({
         centered
       />
       <span className="product__type">Тип товара</span>
-      {optionsMode === OPTIONS_MODES.TYPES && (
-        <section className="product__types">
-          {types.map(({ id, value }) => (
-            <ProductTypeButton
-              key={id}
-              onClick={() => onChooseProductType({ id, value })}
-            >
-              {value}
-            </ProductTypeButton>
-          ))}
-        </section>
-      )}
-      {optionsMode === OPTIONS_MODES.PARAMETERS && (
-        <section className="product__parameters">
-          {parameters.map((parameter) => (
-            <ProductParameter
-              options={parameter.options}
-              label={parameter.name}
-              key={parameter.name}
-            />
-          ))}
-        </section>
-      )}
+      {optionsMode === OPTIONS_MODES.TYPES && getTypesBlock()}
+      {optionsMode === OPTIONS_MODES.PARAMETERS && getParametersBlock()}
       <ProductOption
         label="Закупочная цена товара"
         name={`${productFormPath}.purchasePrice`}
@@ -95,9 +116,17 @@ Product.propTypes = {
   onChooseProductType: PropTypes.func,
   optionsMode: PropTypes.oneOf([OPTIONS_MODES.TYPES, OPTIONS_MODES.PARAMETERS]),
   parameters: PropTypes.arrayOf(
+    // loaded parameters from backend. From this prop we get parameters
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       options: ProductParameter.propTypes.options,
+    })
+  ),
+  formParameters: PropTypes.arrayOf(
+    // parameters from Formik. To this prop we add parameters.
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
     })
   ),
 }
@@ -108,6 +137,7 @@ Product.defaultProps = {
   onChooseProductType: () => {},
   optionsMode: OPTIONS_MODES.TYPES,
   parameters: [],
+  formParameters: [],
 }
 
 export default Product

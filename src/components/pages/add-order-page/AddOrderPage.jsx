@@ -57,6 +57,7 @@ const AddOrderPage = () => {
                         value,
                       })
                     }
+                    formParameters={product.parameters}
                   />
                 )
               })}
