@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Product from './Product'
-import { OPTIONS_MODES } from '../../models/product_model'
 import { Formik } from 'formik'
+import { OPTIONS_MODES } from '../../models/product_constants'
 
 describe('Product', () => {
   const container = document.createElement('div')

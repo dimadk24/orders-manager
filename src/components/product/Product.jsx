@@ -6,9 +6,10 @@ import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
 import Button from '../button'
 import ProductParameter from './product-parameter'
-import { createProductName, OPTIONS_MODES } from '../../models/product_model'
 import ProductOption from './product-option'
 import { FieldArray } from 'formik'
+import { createProductName } from '../../models/product_utils'
+import { OPTIONS_MODES } from '../../models/product_constants'
 
 function Product({
   onRemove,

@@ -5,14 +5,16 @@ import Button from '../../button'
 import OrderData from '../../order-data'
 import './AddOrderPage.css'
 import { FieldArray, Form, Formik } from 'formik'
+import createProduct from '../../../models/product_model'
 import {
-  createProduct,
   getMaximumProductId,
   getOptionsMode,
   getProductArrayIndex,
+} from '../../../models/product_utils'
+import {
   mockProductParameters,
   mockProductTypes,
-} from '../../../models/product_model'
+} from '../../../models/product_constants'
 
 const AddOrderPage = () => {
   const formInitialValues = {
