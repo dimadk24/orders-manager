@@ -1,5 +1,4 @@
 import React from 'react'
-import LabelledInput from '../../labelled-input'
 import Product from '../../product/Product'
 import Button from '../../button'
 import OrderData from '../../order-data'
@@ -15,9 +14,32 @@ import {
   mockProductParameters,
   mockProductTypes,
 } from '../../../models/product_constants'
+import moment from 'moment'
+import LabelledField from '../../labelled-field/LabelledField'
 
 const formInitialValues = {
   products: [createProduct({ id: 1 })],
+  orderData: {
+    id: 1,
+    orderDate: moment(),
+    deliveryDate: moment(),
+    deliveryTime: '',
+    mainPhone: '',
+    additionalPhone: '',
+    address: {
+      index: '',
+      district: '',
+      city: '',
+      streetType: 'ул',
+      streetName: '',
+      house: '',
+      building: '',
+      flat: '',
+      floor: '',
+      entrance: '',
+      comment: '',
+    },
+  },
 }
 
 /* eslint-disable react/prop-types */
@@ -78,7 +100,8 @@ const AddOrderPage = () => (
     {({ values, setFieldValue }) => (
       <>
         <h1 className="order-id-wrapper">
-          <LabelledInput
+          <LabelledField
+            name="orderData.id"
             label="Добавить заказ №"
             type="number"
             inputClassName="order-id-input"
