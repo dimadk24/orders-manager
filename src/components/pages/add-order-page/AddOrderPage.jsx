@@ -74,36 +74,34 @@ const getProductsBlock = ({ products, setFieldValue }) => (
 /* eslint-enable react/prop-types */
 
 const AddOrderPage = () => (
-  <>
-    <h1 className="order-id-wrapper">
-      <LabelledInput
-        label="Добавить заказ №"
-        type="number"
-        inputClassName="order-id-input"
-        centered
-      />
-    </h1>
-    <main>
-      <Formik initialValues={formInitialValues} onSubmit={() => {}}>
-        {({ values, setFieldValue }) => {
-          return (
-            <Form className="form-wrapper">
-              <section className="main-content-wrapper">
-                {getProductsBlock({
-                  products: values.products,
-                  setFieldValue,
-                })}
-                <Button className="btn-save-order">Сохранить заказ</Button>
-              </section>
-              <aside>
-                <OrderData />
-              </aside>
-            </Form>
-          )
-        }}
-      </Formik>
-    </main>
-  </>
+  <Formik initialValues={formInitialValues} onSubmit={() => {}}>
+    {({ values, setFieldValue }) => (
+      <>
+        <h1 className="order-id-wrapper">
+          <LabelledInput
+            label="Добавить заказ №"
+            type="number"
+            inputClassName="order-id-input"
+            centered
+          />
+        </h1>
+        <main>
+          <Form className="form-wrapper">
+            <section className="main-content-wrapper">
+              {getProductsBlock({
+                products: values.products,
+                setFieldValue,
+              })}
+              <Button className="btn-save-order">Сохранить заказ</Button>
+            </section>
+            <aside>
+              <OrderData />
+            </aside>
+          </Form>
+        </main>
+      </>
+    )}
+  </Formik>
 )
 
 AddOrderPage.propTypes = {}
