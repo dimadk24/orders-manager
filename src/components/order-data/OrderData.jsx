@@ -16,8 +16,8 @@ function OrderData() {
       <LabelledInput label="Город" />
       <LabelledInput
         label="Тип улицы"
-        renderInput={() => (
-          <select>
+        renderInput={(inputProps) => (
+          <select {...inputProps}>
             <option value="ул">улица</option>
             <option value="пер">переулок</option>
             <option value="пр">проезд</option>
