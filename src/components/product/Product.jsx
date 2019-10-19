@@ -6,9 +6,10 @@ import '../../assets/fontello/css/fontello.css'
 import ProductTypeButton from './product-type-button'
 import Button from '../button'
 import ProductParameter from './product-parameter'
-import { OPTIONS_MODES } from '../../models/product_model'
 import ProductOption from './product-option'
 import { FieldArray } from 'formik'
+import { createProductName } from '../../models/product_utils'
+import { OPTIONS_MODES } from '../../models/product_constants'
 
 function Product({
   onRemove,
@@ -17,7 +18,7 @@ function Product({
   onChooseProductType,
   optionsMode,
   parameters,
-  formParameters,
+  formValues,
 }) {
   const productFormPath = `products[${index}]`
 
@@ -39,7 +40,7 @@ function Product({
       <FieldArray name={`${productFormPath}.parameters`}>
         {({ push, replace }) => {
           const onChooseParameter = ({ name, value }) => {
-            const foundItemIndex = formParameters.findIndex(
+            const foundItemIndex = formValues.parameters.findIndex(
               (parameter) => parameter.name === name
             )
             if (foundItemIndex === -1) push({ name, value })
@@ -71,6 +72,10 @@ function Product({
       <LabelledInput
         label="Имя товара"
         inputClassName="product__name-input"
+        value={createProductName({
+          type: formValues.type,
+          parameters: formValues.parameters,
+        })}
         disabled
         centered
       />
@@ -116,19 +121,15 @@ Product.propTypes = {
   onChooseProductType: PropTypes.func,
   optionsMode: PropTypes.oneOf([OPTIONS_MODES.TYPES, OPTIONS_MODES.PARAMETERS]),
   parameters: PropTypes.arrayOf(
-    // loaded parameters from backend. From this prop we get parameters
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       options: ProductParameter.propTypes.options,
     })
   ),
-  formParameters: PropTypes.arrayOf(
-    // parameters from Formik. To this prop we add parameters.
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
+  // eslint-disable-next-line react/forbid-prop-types
+  formValues: PropTypes.object, // product Formik object
+  // See createProduct function in product_model.js
+  // and initialValues passed to Formik in the page
 }
 
 Product.defaultProps = {
@@ -137,7 +138,13 @@ Product.defaultProps = {
   onChooseProductType: () => {},
   optionsMode: OPTIONS_MODES.TYPES,
   parameters: [],
-  formParameters: [],
+  formValues: {
+    type: {
+      id: 0,
+      value: '',
+    },
+    parameters: [],
+  },
 }
 
 export default Product
