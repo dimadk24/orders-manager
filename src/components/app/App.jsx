@@ -4,6 +4,7 @@ import Nav from '../nav'
 import AddOrderPage from '../pages/add-order-page/AddOrderPage'
 import { Router } from '@reach/router'
 import SearchPage from '../pages/search-page'
+import OrderPage from '../pages/order-page/OrderPage'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Router>
           <AddOrderPage path="/" />
           <SearchPage path="/search" />
+          <OrderPage path="/clients/:clientId/orders/:orderId" />
         </Router>
       </div>
     </>
