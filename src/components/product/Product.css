@@ -18,7 +18,7 @@
   font-size: 2em;
 }
 
-.product__name-input {
+input.product__name-input {
   width: 350px;
   max-width: 95%;
   background-color: #e6e6e6;

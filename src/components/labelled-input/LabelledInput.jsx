@@ -26,7 +26,7 @@ const LabelledInput = ({
     <label className={labelClasses}>
       {label}{' '}
       {renderInput ? (
-        renderInput()
+        renderInput(other)
       ) : (
         <input className={inputClasses} {...other} />
       )}
