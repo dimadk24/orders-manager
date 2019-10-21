@@ -1,0 +1,8 @@
+.order-table__root {
+  width: '100%';
+  overflow-x: auto;
+}
+
+.order-table__table {
+  min-width: 400px;
+}
