@@ -9,7 +9,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "orders-manager": "file:packages/frontend"
+    "frontend": "file:packages/frontend"
   },
   "scripts": {
     "start": "react-scripts start",
