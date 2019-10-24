@@ -1,7 +1,7 @@
-# orders-manager-frontend
-Frontend of app for managing orders in online store
+# Orders-manager
+App for managing orders in online store
 
-[![CircleCI](https://circleci.com/gh/DimaDK24/orders-manager-frontend/tree/master.svg?style=svg)](https://circleci.com/gh/DimaDK24/orders-manager-frontend/tree/master)
+[![CircleCI](https://circleci.com/gh/DimaDK24/orders-manager/tree/master.svg?style=svg)](https://circleci.com/gh/DimaDK24/orders-manager/tree/master)
 
 ## Launching project for contributing
 
@@ -27,9 +27,9 @@ Fork this repository with `fork` button in the bottom top corner
 Next clone **your new forked** repository.
 **Change your-username to your actual github username in the command:**
 
-`git clone https://github.com/your-username/orders-manager-frontend.git`
+`git clone https://github.com/your-username/orders-manager.git`
 
-Go to project folder: `cd orders-manager-frontend`
+Go to project folder: `cd orders-manager`
 
 Install packages: `yarn install`
 
