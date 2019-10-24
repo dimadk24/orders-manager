@@ -46,9 +46,10 @@ Have a look at other available scripts in `package.json`
 - format - reformat all js,jsx,json,css files according to [prettier](https://prettier.io/)
 config
 - lint:js - runs [eslint](https://eslint.org/) on js and jsx files
-- lint:css - runs [stylelint](https://stylelint.io) on css,sass,scss files
-- lint - runs lint:js and then lint:css
-- deploy - deploys project to github pages. This command runs `build` command before
+- lint:styles - runs [stylelint](https://stylelint.io) on css,sass,scss files
+- lint:code - runs lint:js and then lint:styles
+- lint:commits - runs [commitlint](https://commitlint.js.org/) on commits in new branch
+- lint - runs lint:code and then lint:commits
 - storybook - launches [storybook](https://storybook.js.org/)
 - build-storybook - builds [storybook](https://storybook.js.org/) for deployment 
 
