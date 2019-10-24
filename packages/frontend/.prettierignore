@@ -1,0 +1,16 @@
+build/
+node_modules/
+
+# fontello is like library, which should be downloaded
+src/assets/fontello/
+
+# Jetbrains config files
+.idea
+# I think it's ok to run prettier on .vscode folder to format VS Code settings
+
+# testing
+/coverage
+
+# just in case, cause we run prettier on ALL files in project root
+# and accidentally we can run it on git files
+.git/
