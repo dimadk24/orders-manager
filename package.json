@@ -12,18 +12,18 @@
     "frontend": "file:packages/frontend"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start:frontend": "cd packages/frontend && yarn start",
+    "build:frontend": "cd packages/frontend && yarn build",
+    "test:frontend": "cd packages/frontend && yarn test",
+    "eject-create-react-app": "cd packages/frontend && yarn eject",
     "format": "prettier --write \"./**/*.{js,jsx,json,css,yml}\"",
     "lint:js": "eslint \"./**/*.{js,jsx}\" \"./packages/frontend/.storybook/**/*.js\" --max-warnings=0",
     "lint:styles": "stylelint \"./**/*.{css,sass,scss}\"",
     "lint:code": "yarn lint:js && yarn lint:styles",
     "lint:commits": "commitlint --from origin/master --to HEAD",
     "lint": "yarn lint:code && yarn lint:commits",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "start:storybook": "cd packages/frontend && yarn start-storybook",
+    "build:storybook": "cd packages/frontend && yarn build-storybook"
   },
   "browserslist": {
     "production": [
