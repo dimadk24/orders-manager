@@ -47,12 +47,7 @@ module.exports = {
         assert: 'either',
       },
     ],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: ['**/*.stories.jsx', '.storybook/**/*.js'],
-      },
-    ],
+    'import/no-extraneous-dependencies': 'off',
     'jest-formatting/padding-around-expect-groups': 'off',
     'import/order': 'off',
     'react-redux/prefer-separate-component-file': 'off',
