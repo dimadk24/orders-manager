@@ -26,7 +26,6 @@ module.exports = {
         ignorePattern: '^(import|\\} from )',
       },
     ],
-    'import/no-extraneous-dependencies': 'off',
     'jest-formatting/padding-around-expect-groups': 'off',
     'import/order': 'off',
     'prettier/prettier': 'warn',

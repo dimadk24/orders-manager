@@ -3,9 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: [
-    'plugin:react-redux/recommended',
-  ],
+  extends: ['plugin:react-redux/recommended'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -40,4 +38,15 @@ module.exports = {
     //  Currently unused prop types are reported by react-redux plugin.
     //  Which can correctly handle such case.
   },
+  overrides: [
+    {
+      files: ['.storybook/**/*.js', '**/*.stories.jsx'],
+      rules: {
+        'import/no-extraneous-dependencies': 'off',
+        //  storybook dependencies set only in root package.json
+        //  and this rule can't handle such case
+        //  thus disabled on particular this files
+      },
+    },
+  ],
 }
