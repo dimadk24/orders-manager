@@ -12,7 +12,7 @@ jobs:
           keys:
             - dependencies-v2-{{checksum "yarn.lock" }}
             - dependencies-v2
-      - run: yarn install
+      - run: yarn install && yarn lerna bootstrap
       - save_cache:
           key: dependencies-v2-{{checksum "yarn.lock" }}
           paths:
@@ -34,13 +34,13 @@ jobs:
       - attach_workspace:
           at: .
       - run: yarn lint:commits
-  test:
+  test-frontend:
     executor: ci-executor
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: yarn test
+      - run: yarn test:frontend
 workflows:
   version: 2
   build:
@@ -52,6 +52,6 @@ workflows:
       - lint-code:
           requires:
             - install-dependencies
-      - test:
+      - test-frontend:
           requires:
             - install-dependencies
