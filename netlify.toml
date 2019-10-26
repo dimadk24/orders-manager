@@ -1,0 +1,8 @@
+# configuration file of service for easy frontend deployments
+[build]
+  command = "yarn build:frontend"
+  publish = "packages/frontend/build/"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
