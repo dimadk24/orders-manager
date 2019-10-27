@@ -24,7 +24,8 @@
     "lint:commits": "commitlint --from origin/master --to HEAD",
     "lint": "yarn lint:code && yarn lint:commits",
     "start:storybook": "cd packages/frontend && yarn start-storybook",
-    "build:storybook": "cd packages/frontend && yarn build-storybook"
+    "build:storybook": "cd packages/frontend && yarn build-storybook",
+    "deploy:backend": "cd packages/backend && yarn deploy"
   },
   "browserslist": {
     "production": [
