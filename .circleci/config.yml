@@ -10,11 +10,11 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - dependencies-v1-{{checksum "yarn.lock" }}
-            - dependencies-v1
+            - dependencies-v2-{{checksum "yarn.lock" }}
+            - dependencies-v2
       - run: yarn install
       - save_cache:
-          key: dependencies-v1-{{checksum "yarn.lock" }}
+          key: dependencies-v2-{{checksum "yarn.lock" }}
           paths:
             - node_modules
       - persist_to_workspace:
