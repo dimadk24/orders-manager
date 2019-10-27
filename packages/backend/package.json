@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "homepage": "https://orders-manager.netlify.com",
+  "description": "Backend of app for managing orders in online store",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimaDK24/orders-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DimaDK24/orders-manager/issues"
+  },
+  "version": "0.1.0",
+  "author": "Dima Krutolianov <DimaKrutDK@ya.ru>",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [
+    "serverless"
+  ]
+}

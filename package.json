@@ -9,6 +9,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "backend": "file:packages/backend",
     "frontend": "file:packages/frontend"
   },
   "scripts": {
@@ -56,6 +57,7 @@
     "eslint-plugin-react-redux": "^3.0.1",
     "lerna": "^3.18.3",
     "prettier": "1.18.2",
+    "serverless": "^1.55.1",
     "stylelint": "~10.1.0",
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-recommended": "^2.2.0",
