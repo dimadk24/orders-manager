@@ -34,6 +34,13 @@ jobs:
       - attach_workspace:
           at: .
       - run: yarn lint:commits
+  test-backend:
+    executor: ci-executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: yarn test:backend
   test-frontend:
     executor: ci-executor
     steps:
@@ -50,6 +57,9 @@ workflows:
           requires:
             - install-dependencies
       - lint-code:
+          requires:
+            - install-dependencies
+      - test-backend:
           requires:
             - install-dependencies
       - test-frontend:

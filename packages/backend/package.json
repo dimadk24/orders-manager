@@ -4,7 +4,7 @@
   "description": "Backend of app for managing orders in online store",
   "scripts": {
     "deploy": "cd main-service && sls deploy",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

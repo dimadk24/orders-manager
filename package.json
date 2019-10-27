@@ -16,6 +16,8 @@
     "start:frontend": "cd packages/frontend && yarn start",
     "build:frontend": "cd packages/frontend && yarn build",
     "test:frontend": "cd packages/frontend && yarn test",
+    "test:backend": "cd packages/backend && yarn test",
+    "test": "yarn test:backend && yarn test:frontend",
     "eject-create-react-app": "cd packages/frontend && yarn eject",
     "format": "prettier --write \"./**/*.{js,jsx,json,css,yml}\"",
     "lint:js": "eslint \"./**/*.{js,jsx}\" \"./packages/frontend/.storybook/**/*.js\" --max-warnings=0",
