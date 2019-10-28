@@ -63,6 +63,9 @@ workflows:
       - lint-commits:
           requires:
             - install-dependencies
+          filters:
+            branches:
+              ignore: master
       - lint-code:
           requires:
             - install-dependencies
