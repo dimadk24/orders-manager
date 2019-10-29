@@ -19,5 +19,8 @@
   "main": "index.js",
   "keywords": [
     "serverless"
-  ]
+  ],
+  "dependencies": {
+    "mongodb": "^3.3.3"
+  }
 }
