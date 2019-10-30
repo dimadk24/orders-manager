@@ -21,6 +21,7 @@
     "serverless"
   ],
   "dependencies": {
+    "lazy-universal-dotenv": "^3.0.1",
     "mongodb": "^3.3.3"
   }
 }
