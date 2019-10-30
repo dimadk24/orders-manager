@@ -14,6 +14,7 @@
   },
   "scripts": {
     "start:frontend": "cd packages/frontend && yarn start",
+    "start:backend": "cd packages/backend && yarn start",
     "build:frontend": "cd packages/frontend && yarn build",
     "test:frontend": "cd packages/frontend && yarn test",
     "test:backend": "cd packages/backend && yarn test",
