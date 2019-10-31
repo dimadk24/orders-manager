@@ -1,8 +1,9 @@
 import React from 'react'
-import LabelledInput from '../../labelled-input/LabelledInput'
 import './SearchPage.css'
 import Button from '../../button/Button'
 import OrderTable from '../../order-table/OrderTable'
+import { Form, Formik } from 'formik'
+import LabelledField from '../../labelled-field/LabelledField'
 
 const rows = [
   {
@@ -17,37 +18,62 @@ const rows = [
   },
 ]
 
+const initialFormState = {
+  id: '',
+  phone: '',
+  city: '',
+  streetName: '',
+  house: '',
+}
+
 const SearchPage = () => {
   return (
     <>
-      <form action="" className="search-page-form">
-        <LabelledInput
-          label="ID заказа"
-          labelClassName="search-page-form-field"
-          centered
-        />
-        <LabelledInput
-          label="Телефон"
-          labelClassName="search-page-form-field"
-          centered
-        />
-        <LabelledInput
-          label="Город"
-          labelClassName="search-page-form-field"
-          centered
-        />
-        <LabelledInput
-          label="Улица"
-          labelClassName="search-page-form-field"
-          centered
-        />
-        <LabelledInput
-          label="Дом"
-          labelClassName="search-page-form-field"
-          centered
-        />
-        <Button className="search-page-form-submit-button">Найти</Button>
-      </form>
+      <Formik
+        initialValues={initialFormState}
+        onSubmit={(values) => {
+          // eslint-disable-next-line no-console
+          console.log(JSON.stringify(values, null, 2))
+        }}
+      >
+        {() => (
+          <Form className="search-page-form">
+            <LabelledField
+              label="ID заказа"
+              labelClassName="search-page-form-field"
+              centered
+              name="id"
+            />
+            <LabelledField
+              label="Телефон"
+              labelClassName="search-page-form-field"
+              centered
+              name="phone"
+            />
+            <LabelledField
+              label="Город"
+              labelClassName="search-page-form-field"
+              centered
+              name="city"
+            />
+            <LabelledField
+              label="Улица"
+              labelClassName="search-page-form-field"
+              centered
+              name="streetName"
+            />
+            <LabelledField
+              label="Дом"
+              labelClassName="search-page-form-field"
+              centered
+              name="house"
+            />
+            <Button className="search-page-form-submit-button" type="submit">
+              Найти
+            </Button>
+          </Form>
+        )}
+      </Formik>
       <OrderTable rows={rows} />
     </>
   )
