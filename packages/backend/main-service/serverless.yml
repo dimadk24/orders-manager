@@ -58,8 +58,14 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
+  index:
+    handler: handlers.index
+    events:
+      - http:
+          path: /
+          method: any
   create-order:
-    handler: handler.createOrder
+    handler: handlers.createOrder
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

@@ -1,3 +1,8 @@
+const index = async () => ({
+  statusCode: 200,
+  body: 'Hello World, orders manager backend. It works!',
+})
+
 const createOrder = async (event) => {
   return {
     statusCode: 200,
@@ -12,4 +17,4 @@ const createOrder = async (event) => {
   }
 }
 
-module.exports = { createOrder }
+module.exports = { index, createOrder }
