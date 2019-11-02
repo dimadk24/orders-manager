@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "lazy-universal-dotenv": "^3.0.1",
-    "mongodb": "^3.3.3",
-    "serverless-offline": "^5.12.0"
+    "mongodb": "^3.3.3"
   },
   "devDependencies": {
+    "serverless-offline": "^5.12.0",
     "serverless": "^1.55.1"
   },
   "version": "0.1.0",
