@@ -2,7 +2,6 @@
 App for managing orders in online store
 
 [![CircleCI](https://circleci.com/gh/DimaDK24/orders-manager/tree/master.svg?style=svg)](https://circleci.com/gh/DimaDK24/orders-manager/tree/master)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 ## Launching project for contributing
 

@@ -12,7 +12,7 @@ jobs:
           keys:
             - dependencies-v2-{{checksum "yarn.lock" }}
             - dependencies-v2
-      - run: yarn install && yarn lerna bootstrap
+      - run: yarn install
       - save_cache:
           key: dependencies-v2-{{checksum "yarn.lock" }}
           paths:

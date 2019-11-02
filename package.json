@@ -59,7 +59,6 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-redux": "^3.0.1",
-    "lerna": "^3.18.3",
     "prettier": "1.18.2",
     "serverless": "^1.55.1",
     "stylelint": "~10.1.0",
