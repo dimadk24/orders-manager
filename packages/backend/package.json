@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "homepage": "https://orders-manager.netlify.com",
+  "description": "Backend of app for managing orders in online store",
+  "scripts": {
+    "start": "yarn launch-local",
+    "launch-local": "cd src && sls offline",
+    "deploy": "cd src && sls deploy",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimaDK24/orders-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DimaDK24/orders-manager/issues"
+  },
+  "dependencies": {
+    "lazy-universal-dotenv": "^3.0.1",
+    "mongodb": "^3.3.3"
+  },
+  "devDependencies": {
+    "serverless-offline": "^5.12.0",
+    "serverless": "^1.55.1"
+  },
+  "version": "0.1.0",
+  "author": "Dima Krutolianov <DimaKrutDK@ya.ru>",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [
+    "serverless"
+  ]
+}

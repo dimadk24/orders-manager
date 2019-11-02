@@ -33,24 +33,63 @@ Go to project folder: `cd orders-manager`
 
 Install packages: `yarn install`
 
-Launch app: `yarn start`
+We have frontend and backend in the same repo and use
+[yarn workspaces](https://yarnpkg.com/en/docs/workspaces) to manage monorepo.
+Frontend is located in `packages/frontend`, backend - `packages/backend`.
+They are just regular packages.
+You only need to run `yarn install` one time in the **root** folder. Yarn sees subpackages
+and installs their dependencies and dependencies of root package.
+There's no magic, just [yarn workspaces](https://yarnpkg.com/en/docs/workspaces)
 
-Have a look at other available scripts in `package.json`
+## Working with frontend
 
-## Package scripts
+Frontend is built on [ReactJS](http://reactjs.org/)
+and was bootstrapped with [create-react-app](https://create-react-app.dev/).
 
-- start - launches project at local dev server with hot reloading (it's hot as hell)
-- build - makes production build of the project into `build` folder
-- test - launches [jest test runner](https://jestjs.io/)
-- eject - ejects project from create-react-app. Never run this script
+## Working with backend
+
+Backend is built on [AWS Lambda](https://aws.amazon.com/lambda/)
+with help of [serverless framework](https://serverless.com/).
+Local launch is handled by [serverless-offline](https://github.com/dherault/serverless-offline/).
+Our database is [MongoDB](https://www.mongodb.com/).
+
+In order to launch backend locally you need to create MongoDB database.
+You can use [free 500 mb MongoDB Atlas Cluster](https://www.mongodb.com/cloud/atlas)
+
+To launch backend:
+
+- Copy `.env.local.example` to `.env.local`
+- Replace fake DB connect url with your own (get it in MongoDB Atlas or from local MongoDB server)
+- Run `yarn start:backend`. I believe you already installed all dependencies :)
+- Open [localhost:3001](http://localhost:3001/) to verify, that basic logic works
+- Open [localhost:3001/test-db](http://localhost:3001/test-db) to verify,
+that functions can connect to database
+
+## Available scripts
+
+All scripts should be run in root folder.
+
+### Frontend
+
+- start:frontend - launches frontend at local dev server with hot reloading (it's hot as hell)
+- test:frontend - runs tests, defined in frontend package
+- start:storybook - launches [storybook](https://storybook.js.org/)
+
+### Backend
+
+- start:backend - launches backend locally, read "Working with backend" section
+- test:backend - runs tests, defined in backend package
+
+### Common (frontend + backend) scripts
+
+- test - tests backend and frontend
 - format - reformat all js,jsx,json,css files according to [prettier](https://prettier.io/)
 config
 - lint:js - runs [eslint](https://eslint.org/) on js and jsx files
-- lint:css - runs [stylelint](https://stylelint.io) on css,sass,scss files
-- lint - runs lint:js and then lint:css
-- deploy - deploys project to github pages. This command runs `build` command before
-- storybook - launches [storybook](https://storybook.js.org/)
-- build-storybook - builds [storybook](https://storybook.js.org/) for deployment 
+- lint:styles - runs [stylelint](https://stylelint.io) on css,sass,scss files
+- lint:code - runs lint:js and then lint:styles
+- lint:commits - runs [commitlint](https://commitlint.js.org/) on commits in new branch
+- lint - runs lint:code and then lint:commits
 
 ## Git configuration for end of lines
 

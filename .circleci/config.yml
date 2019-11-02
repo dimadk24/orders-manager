@@ -2,7 +2,7 @@ version: 2.1
 executors:
   ci-executor:
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:10.17.0
 jobs:
   install-dependencies:
     executor: ci-executor
@@ -34,13 +34,27 @@ jobs:
       - attach_workspace:
           at: .
       - run: yarn lint:commits
-  test:
+  test-backend:
     executor: ci-executor
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: yarn test
+      - run: yarn test:backend
+  test-frontend:
+    executor: ci-executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: yarn test:frontend
+  deploy-backend:
+    executor: ci-executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: yarn deploy:backend
 workflows:
   version: 2
   build:
@@ -49,9 +63,21 @@ workflows:
       - lint-commits:
           requires:
             - install-dependencies
+          filters:
+            branches:
+              ignore: master
       - lint-code:
           requires:
             - install-dependencies
-      - test:
+      - test-backend:
           requires:
             - install-dependencies
+      - test-frontend:
+          requires:
+            - install-dependencies
+      - deploy-backend:
+          requires:
+            - test-backend
+          filters:
+            branches:
+              only: master
