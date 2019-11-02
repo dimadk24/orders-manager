@@ -12,22 +12,22 @@
     "packages/*"
   ],
   "scripts": {
-    "start:frontend": "cd packages/frontend && yarn start",
-    "start:backend": "cd packages/backend && yarn start",
-    "build:frontend": "cd packages/frontend && yarn build",
-    "test:frontend": "cd packages/frontend && yarn test",
-    "test:backend": "cd packages/backend && yarn test",
+    "start:frontend": "yarn workspace frontend start",
+    "start:backend": "yarn workspace backend start",
+    "build:frontend": "yarn workspace frontend build",
+    "test:frontend": "yarn workspace frontend test",
+    "test:backend": "yarn workspace backend test",
     "test": "yarn test:backend && yarn test:frontend",
-    "eject-create-react-app": "cd packages/frontend && yarn eject",
+    "eject-create-react-app": "yarn workspace frontend eject",
     "format": "prettier --write \"./**/*.{js,jsx,json,css,yml}\"",
     "lint:js": "eslint \"./**/*.{js,jsx}\" \"./packages/frontend/.storybook/**/*.js\" --max-warnings=0",
-    "lint:styles": "cd packages/frontend && yarn lint:styles",
+    "lint:styles": "yarn workspace frontend lint:styles",
     "lint:code": "yarn lint:js && yarn lint:styles",
     "lint:commits": "commitlint --from origin/master --to HEAD",
     "lint": "yarn lint:code && yarn lint:commits",
-    "start:storybook": "cd packages/frontend && yarn start-storybook",
-    "build:storybook": "cd packages/frontend && yarn build-storybook",
-    "deploy:backend": "cd packages/backend && yarn deploy"
+    "start:storybook": "yarn workspace frontend start-storybook",
+    "build:storybook": "yarn workspace frontend build-storybook",
+    "deploy:backend": "yarn workspace backend deploy"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
