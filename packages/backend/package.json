@@ -4,8 +4,8 @@
   "description": "Backend of app for managing orders in online store",
   "scripts": {
     "start": "yarn launch-local",
-    "launch-local": "cd src && sls offline",
-    "deploy": "cd src && sls deploy",
+    "launch-local": "sls offline",
+    "deploy": "sls deploy",
     "test": "jest"
   },
   "repository": {
