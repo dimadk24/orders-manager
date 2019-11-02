@@ -14459,6 +14459,13 @@ serverless-offline@^5.12.0:
     update-notifier "^3.0.1"
     velocityjs "^1.1.5"
 
+serverless-plugin-monorepo@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/serverless-plugin-monorepo/-/serverless-plugin-monorepo-0.8.0.tgz#1cba60f83df68c308ed02ec7c619806c588ee68b"
+  integrity sha512-KGrPfnZtdC0ZiSU1LUPn+LLCFUfzjb+DuJrD1tje8IhxkSabGk6qcQfG4mBEszK/cih+eE+nl8A7vZSDQ4fE0A==
+  dependencies:
+    fs-extra "^7.0.0"
+
 serverless@^1.55.1:
   version "1.56.1"
   resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.56.1.tgz#9ceda7a05fa7be7361477c0cd14fc6ec4f087c9a"

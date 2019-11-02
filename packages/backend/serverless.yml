@@ -126,6 +126,7 @@ functions:
 
 plugins:
   - serverless-offline
+  - serverless-plugin-monorepo
 
 custom:
   serverless-offline:
