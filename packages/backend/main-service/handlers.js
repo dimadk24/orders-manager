@@ -3,7 +3,12 @@ const { getEnvironment } = require('lazy-universal-dotenv')
 
 const index = async () => ({
   statusCode: 200,
-  body: 'Hello World, orders manager backend. It works!',
+  headers: {
+    'content-type': 'text/html; charset=UTF-8',
+  },
+  body: `Hello World, orders manager backend. Basic logic works!<br/>
+Please also verify, that I can connect to database,
+visit <a href="/test-db">this url</a>`,
 })
 
 const testDatabase = async () => {
