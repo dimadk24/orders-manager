@@ -125,6 +125,7 @@ functions:
 #       Value: "Some output value"
 
 plugins:
+  - serverless-offline-ssm
   - serverless-offline
   - serverless-plugin-monorepo
 

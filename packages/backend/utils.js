@@ -1,7 +1,3 @@
-const {
-  getEnvironment: dotenvGetEnvironment,
-} = require('lazy-universal-dotenv')
-
-const getEnvironment = () => dotenvGetEnvironment().raw
+const getEnvironment = () => process.env
 
 module.exports = { getEnvironment }
