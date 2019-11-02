@@ -8,7 +8,7 @@ const index = async () => ({
   },
   body: `Hello World, orders manager backend. Basic logic works!<br/>
 Please also verify, that I can connect to database,
-visit <a href="/test-db">this url</a>`,
+visit <a href="./test-db">this url</a>`,
 })
 
 const testDatabase = async () => {

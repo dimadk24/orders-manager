@@ -58,8 +58,9 @@ You can use [free 500 mb MongoDB Atlas Cluster](https://www.mongodb.com/cloud/at
 
 To launch backend:
 
-- Copy `.env.local.example` to `.env.local`
-- Replace fake DB connect url with your own (get it in MongoDB Atlas or from local MongoDB server)
+- Copy `packages/backend/.env.example` to `packages/backend/.env`
+- In `packages/backend/.env` replace fake DB connect url
+with your own (get it in MongoDB Atlas or from local MongoDB server)
 - Run `yarn start:backend`. I believe you already installed all dependencies :)
 - Open [localhost:3001](http://localhost:3001/) to verify, that basic logic works
 - Open [localhost:3001/test-db](http://localhost:3001/test-db) to verify,

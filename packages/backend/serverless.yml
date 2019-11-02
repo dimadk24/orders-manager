@@ -45,8 +45,8 @@ provider:
 #            - "/*"
 
 # you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+  environment:
+    DB_CONNECT_URL: ${ssm:DB_CONNECT_URL}
 
 # you can add packaging information here
 #package:
@@ -125,7 +125,9 @@ functions:
 #       Value: "Some output value"
 
 plugins:
+  - serverless-offline-ssm
   - serverless-offline
+  - serverless-plugin-monorepo
 
 custom:
   serverless-offline:
