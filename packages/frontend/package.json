@@ -23,6 +23,14 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8"
   },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-redux": "^3.0.1",
+    "stylelint": "~10.1.0",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-prettier": "^1.1.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

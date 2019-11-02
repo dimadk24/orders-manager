@@ -8,10 +8,9 @@
   },
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "backend": "file:packages/backend",
-    "frontend": "file:packages/frontend"
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "start:frontend": "cd packages/frontend && yarn start",
     "start:backend": "cd packages/backend && yarn start",
@@ -22,7 +21,7 @@
     "eject-create-react-app": "cd packages/frontend && yarn eject",
     "format": "prettier --write \"./**/*.{js,jsx,json,css,yml}\"",
     "lint:js": "eslint \"./**/*.{js,jsx}\" \"./packages/frontend/.storybook/**/*.js\" --max-warnings=0",
-    "lint:styles": "stylelint \"./**/*.{css,sass,scss}\"",
+    "lint:styles": "cd packages/frontend && yarn lint:styles",
     "lint:code": "yarn lint:js && yarn lint:styles",
     "lint:commits": "commitlint --from origin/master --to HEAD",
     "lint": "yarn lint:code && yarn lint:commits",
@@ -57,14 +56,7 @@
     "eslint-plugin-jest-formatting": "^1.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-redux": "^3.0.1",
-    "prettier": "1.18.2",
-    "serverless": "^1.55.1",
-    "stylelint": "~10.1.0",
-    "stylelint-config-prettier": "^5.2.0",
-    "stylelint-config-recommended": "^2.2.0",
-    "stylelint-prettier": "^1.1.1"
+    "prettier": "1.18.2"
   },
   "keywords": [
     "react"
