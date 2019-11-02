@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb')
-const { getEnvironment } = require('lazy-universal-dotenv')
+const { getEnvironment } = require('./utils')
 
 const index = async () => ({
   statusCode: 200,
@@ -12,8 +12,8 @@ visit <a href="/test-db">this url</a>`,
 })
 
 const testDatabase = async () => {
-  const environment = getEnvironment().raw
-  const client = new MongoClient(environment.DB_CONNECT_URL)
+  const { DB_CONNECT_URL } = getEnvironment()
+  const client = new MongoClient(DB_CONNECT_URL)
   let successful
   let errorStack
   try {
