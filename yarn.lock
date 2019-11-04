@@ -14439,6 +14439,11 @@ serve-static@1.14.1:
     parseurl "~1.3.3"
     send "0.17.1"
 
+serverless-compose@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/serverless-compose/-/serverless-compose-2.4.0.tgz#35f2be26c4b3a5abb3803b24cbce4851917fea70"
+  integrity sha512-tE+KJ8okTaLWr1Xe1X2FMHKgsz9q56BpG2o4IK7OisyB0SUuUfjeEJfPhPVk4JkGb1/v0KsQxYAbCmGUMGSC3w==
+
 serverless-offline-ssm@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/serverless-offline-ssm/-/serverless-offline-ssm-4.1.0.tgz#5d0375f246b74a6d4a65e35b53b7c110734c7ac8"

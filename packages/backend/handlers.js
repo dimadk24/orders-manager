@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb')
-const { getEnvironment, createLambda } = require('./utils')
+const { getEnvironment } = require('./utils')
+const { createLambda } = require('./middlewares')
 
 const index = createLambda(async () => ({
   statusCode: 200,
