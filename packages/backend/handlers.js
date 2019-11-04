@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb')
-const { getEnvironment } = require('./utils')
+const { getEnvironment, createLambda } = require('./utils')
 
-const index = async () => ({
+const index = createLambda(async () => ({
   statusCode: 200,
   headers: {
     'content-type': 'text/html; charset=UTF-8',
@@ -9,9 +9,9 @@ const index = async () => ({
   body: `Hello World, orders manager backend. Basic logic works!<br/>
 Please also verify, that I can connect to database,
 visit <a href="./test-db">this url</a>`,
-})
+}))
 
-const testDatabase = async () => {
+const testDatabase = createLambda(async () => {
   const { DB_CONNECT_URL } = getEnvironment()
   const client = new MongoClient(DB_CONNECT_URL)
   let successful
@@ -34,9 +34,9 @@ const testDatabase = async () => {
         : `It didn't work :(, here is error log:\n\n${errorStack}`
     }`,
   }
-}
+})
 
-const createOrder = async (event) => {
+const createOrder = createLambda(async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(
@@ -48,6 +48,6 @@ const createOrder = async (event) => {
       2
     ),
   }
-}
+})
 
 module.exports = { index, testDatabase, createOrder }
