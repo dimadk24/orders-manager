@@ -27,23 +27,17 @@ const testDatabase = createLambda(async () => {
     successful = false
   }
   await client.close()
-  return {
-    statusCode: 200,
-    body: `Hello MongoDB! ${
-      successful
-        ? 'It works!'
-        : `It didn't work :(, here is error log:\n\n${errorStack}`
-    }`,
-  }
+  return `Hello MongoDB! ${
+    successful
+      ? 'It works!'
+      : `It didn't work :(, here is error log:\n\n${errorStack}`
+  }`
 })
 
 const createOrder = createLambda(async (event) => {
   return {
-    statusCode: 200,
-    body: {
-      message: 'Hello world!',
-      input: event,
-    },
+    message: 'Hello world!',
+    input: event,
   }
 })
 
