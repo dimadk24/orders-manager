@@ -48,7 +48,11 @@ const addDefaultStatusCodeMiddleware = (next) => async (event, context) => {
 const throwOnFalsyResponseMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
   if (response === undefined || response === null) {
-    throw new Error(`expected response from function not to be "${response}"`)
+    let message = `expected response from function not to be "${response}"`
+    if (response === undefined) {
+      message += `, please check that you return something in your function :)`
+    }
+    throw new Error(message)
   }
   return response
 }
