@@ -3,7 +3,6 @@ const { getEnvironment } = require('./utils')
 const { createLambda } = require('./middlewares')
 
 const index = createLambda(async () => ({
-  statusCode: 200,
   headers: {
     'content-type': 'text/html; charset=UTF-8',
   },
