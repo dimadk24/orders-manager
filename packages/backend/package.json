@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "mongodb": "^3.3.3",
-    "serverless-compose": "^2.4.0"
+    "serverless-compose": "^2.4.0",
+    "type-detect": "^4.0.8"
   },
   "devDependencies": {
     "serverless": "^1.55.1",

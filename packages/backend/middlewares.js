@@ -1,3 +1,4 @@
+const type = require('type-detect')
 const { compose, recoveryMiddleware } = require('serverless-compose')
 
 const waitForEmptyEventLoopMiddleware = (next) => (event, context) => {
@@ -16,11 +17,12 @@ const errorMiddleware = recoveryMiddleware((error) => {
 
 const stringifyJSONMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
-  const bodyType = typeof response.body
-  if (bodyType === 'object') {
-    response.body = JSON.stringify(response.body)
+  const { body } = response
+  const bodyType = type(body)
+  if (bodyType === 'Object') {
+    response.body = JSON.stringify(body)
   } else if (bodyType !== 'string') {
-    throw new Error(`unsupported response.body type ${bodyType}`)
+    throw new Error(`unsupported response.body type: ${bodyType}`)
   }
   return response
 }
@@ -37,7 +39,7 @@ const convertBodyMiddleware = (next) => async (event, context) => {
 
 const addDefaultStatusCodeMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
-  if (typeof response.statusCode === 'undefined') {
+  if (type(response.statusCode) === 'undefined') {
     response.statusCode = 200
   }
   return response
@@ -60,4 +62,12 @@ const createLambda = compose(
   throwOnFalsyResponseMiddleware
 )
 
-module.exports = { createLambda }
+module.exports = {
+  createLambda,
+  waitForEmptyEventLoopMiddleware,
+  errorMiddleware,
+  stringifyJSONMiddleware,
+  addDefaultStatusCodeMiddleware,
+  convertBodyMiddleware,
+  throwOnFalsyResponseMiddleware,
+}
