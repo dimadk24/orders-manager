@@ -11,7 +11,10 @@ const errorMiddleware = recoveryMiddleware((error) => {
   console.error(error)
   return {
     statusCode: 500,
-    body: { error: true, message: 'internal server error' },
+    body: {
+      error: true,
+      message: 'internal server error, view console logs for details',
+    },
   }
 })
 

@@ -12,7 +12,7 @@ const callHandler = (handler, event = {}, context = {}) =>
 
 const INTERNAL_SERVER_ERROR_RESPONSE = {
   statusCode: 500,
-  body: '{"error":true,"message":"internal server error"}',
+  body: `{"error":true,"message":"internal server error, view console logs for details"}`, // eslint-disable-line max-len
 }
 
 const KIND_RETURNED_UNDEFINED_ERROR =
