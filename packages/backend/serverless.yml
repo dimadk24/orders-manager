@@ -59,19 +59,19 @@ provider:
 
 functions:
   index:
-    handler: handlers.index
+    handler: dev_handlers.index
     events:
       - http:
           path: /
           method: any
   test-database:
-    handler: handlers.testDatabase
+    handler: dev_handlers.testDatabase
     events:
       - http:
           path: /test-db
           method: any
   create-order:
-    handler: handlers.createOrder
+    handler: main_handlers.createOrder
     #    The following are a few example events you can configure
     #    NOTE: Please make sure to change your handler code to work with those events
     #    Check the event documentation for details
