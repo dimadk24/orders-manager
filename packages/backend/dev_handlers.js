@@ -33,11 +33,7 @@ const testDatabase = createLambda(async () => {
   }`
 })
 
-const createOrder = createLambda(async (event) => {
-  return {
-    message: 'Hello world!',
-    input: event,
-  }
-})
-
-module.exports = { index, testDatabase, createOrder }
+module.exports = {
+  index,
+  testDatabase,
+}
