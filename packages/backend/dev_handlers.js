@@ -1,5 +1,4 @@
-const { MongoClient } = require('mongodb')
-const { getEnvironment } = require('./utils')
+const { getMongoClient } = require('./utils')
 const { createLambda } = require('./middlewares')
 
 const index = createLambda(async () => ({
@@ -12,20 +11,16 @@ visit <a href="./test-db">this url</a>`,
 }))
 
 const testDatabase = createLambda(async () => {
-  const { DB_CONNECT_URL } = getEnvironment()
-  const client = new MongoClient(DB_CONNECT_URL)
   let successful
   let errorStack
   try {
-    await client.connect()
-    client.db()
+    await getMongoClient()
     successful = true
   } catch (err) {
     errorStack = err.stack
     console.log(errorStack)
     successful = false
   }
-  await client.close()
   return `Hello MongoDB! ${
     successful
       ? 'It works!'
