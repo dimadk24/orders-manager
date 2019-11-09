@@ -1,7 +1,7 @@
 const {
   errorMiddleware,
   stringifyJSONResponseMiddleware,
-  convertBodyMiddleware,
+  convertResponseBodyMiddleware,
   addDefaultStatusCodeMiddleware,
   throwOnFalsyResponseMiddleware,
   createLambda,
@@ -77,10 +77,10 @@ describe('stringifyJSONResponseMiddleware', () => {
   })
 })
 
-describe('convertBodyMiddleware', () => {
+describe('convertResponseBodyMiddleware', () => {
   it('converts body, allows just return body in lambda function', async () => {
     const handler = async () => ({ ok: true })
-    const wrappedHandler = convertBodyMiddleware(handler)
+    const wrappedHandler = convertResponseBodyMiddleware(handler)
 
     expect(await wrappedHandler()).toEqual({ body: { ok: true } })
   })

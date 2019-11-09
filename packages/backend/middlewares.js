@@ -30,7 +30,7 @@ const stringifyJSONResponseMiddleware = (next) => async (event, context) => {
   return response
 }
 
-const convertBodyMiddleware = (next) => async (event, context) => {
+const convertResponseBodyMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
   if (response.body === undefined) {
     return {
@@ -65,7 +65,7 @@ const createLambda = compose(
   addDefaultStatusCodeMiddleware,
   stringifyJSONResponseMiddleware,
   errorMiddleware,
-  convertBodyMiddleware,
+  convertResponseBodyMiddleware,
   throwOnFalsyResponseMiddleware
 )
 
@@ -75,6 +75,6 @@ module.exports = {
   errorMiddleware,
   stringifyJSONResponseMiddleware,
   addDefaultStatusCodeMiddleware,
-  convertBodyMiddleware,
+  convertResponseBodyMiddleware,
   throwOnFalsyResponseMiddleware,
 }
