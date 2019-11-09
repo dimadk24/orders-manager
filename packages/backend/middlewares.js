@@ -18,7 +18,7 @@ const errorMiddleware = recoveryMiddleware((error) => {
   }
 })
 
-const stringifyJSONMiddleware = (next) => async (event, context) => {
+const stringifyJSONResponseMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
   const { body } = response
   const bodyType = type(body)
@@ -63,7 +63,7 @@ const throwOnFalsyResponseMiddleware = (next) => async (event, context) => {
 const createLambda = compose(
   waitForEmptyEventLoopMiddleware,
   addDefaultStatusCodeMiddleware,
-  stringifyJSONMiddleware,
+  stringifyJSONResponseMiddleware,
   errorMiddleware,
   convertBodyMiddleware,
   throwOnFalsyResponseMiddleware
@@ -73,7 +73,7 @@ module.exports = {
   createLambda,
   waitForEmptyEventLoopMiddleware,
   errorMiddleware,
-  stringifyJSONMiddleware,
+  stringifyJSONResponseMiddleware,
   addDefaultStatusCodeMiddleware,
   convertBodyMiddleware,
   throwOnFalsyResponseMiddleware,

@@ -1,6 +1,6 @@
 const {
   errorMiddleware,
-  stringifyJSONMiddleware,
+  stringifyJSONResponseMiddleware,
   convertBodyMiddleware,
   addDefaultStatusCodeMiddleware,
   throwOnFalsyResponseMiddleware,
@@ -49,12 +49,12 @@ describe('errorMiddleware', () => {
   })
 })
 
-describe('stringifyJSONMiddleware', () => {
+describe('stringifyJSONResponseMiddleware', () => {
   it('stringifies response.body if it is object', async () => {
     const handler = async () => ({
       body: { ok: true, items: [1, 2, 3, 4] },
     })
-    const wrappedHandler = stringifyJSONMiddleware(handler)
+    const wrappedHandler = stringifyJSONResponseMiddleware(handler)
 
     const response = await wrappedHandler()
 
@@ -66,7 +66,7 @@ describe('stringifyJSONMiddleware', () => {
     const handler = async () => ({
       body: [1, 2, 3],
     })
-    const wrappedHandler = stringifyJSONMiddleware(handler)
+    const wrappedHandler = stringifyJSONResponseMiddleware(handler)
 
     try {
       await wrappedHandler()
