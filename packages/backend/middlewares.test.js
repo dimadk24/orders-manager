@@ -18,7 +18,13 @@ const INTERNAL_SERVER_ERROR_RESPONSE = {
 const KIND_RETURNED_UNDEFINED_ERROR =
   'please check that you return something in your function'
 
+const originalConsoleError = console.error
+
 describe('errorMiddleware', () => {
+  afterEach(() => {
+    console.error = originalConsoleError
+  })
+
   it('returns 500 if handler throws error', async () => {
     const handler = async () => {
       throw new Error('test')
@@ -156,6 +162,7 @@ describe('createLambda', () => {
 
     expect(response).toEqual(INTERNAL_SERVER_ERROR_RESPONSE)
     expect(console.error).toHaveBeenCalled()
+    console.error = originalConsoleError
   })
 
   it('allows to set statusCode in handler', async () => {
@@ -181,6 +188,7 @@ describe('createLambda', () => {
     expect(console.error).toHaveBeenCalled()
     const loggedErrorMessage = console.error.mock.calls[0][0].message
     expect(loggedErrorMessage).toContain(KIND_RETURNED_UNDEFINED_ERROR)
+    console.error = originalConsoleError
   })
 
   it('allows to set headers', async () => {
