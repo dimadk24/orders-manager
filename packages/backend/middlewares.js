@@ -18,6 +18,18 @@ const errorMiddleware = recoveryMiddleware((error) => {
   }
 })
 
+const parseJSONRequestBodyMiddleware = (next) => async (event, context) => {
+  try {
+    const parsedBody = JSON.parse(event.body)
+    // JSON.parse('null') === null, JSON.parse('true') === true
+    if (type(parsedBody) === 'Object') {
+      // eslint-disable-next-line no-param-reassign
+      event.body = parsedBody
+    }
+  } catch (e) {} // eslint-disable-line no-empty
+  return next(event, context)
+}
+
 const stringifyJSONResponseMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
   const { body } = response
@@ -66,7 +78,8 @@ const createLambda = compose(
   stringifyJSONResponseMiddleware,
   errorMiddleware,
   convertResponseBodyMiddleware,
-  throwOnFalsyResponseMiddleware
+  throwOnFalsyResponseMiddleware,
+  parseJSONRequestBodyMiddleware
 )
 
 module.exports = {
@@ -77,4 +90,5 @@ module.exports = {
   addDefaultStatusCodeMiddleware,
   convertResponseBodyMiddleware,
   throwOnFalsyResponseMiddleware,
+  parseJSONRequestBodyMiddleware,
 }
