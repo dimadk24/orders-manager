@@ -31,5 +31,7 @@ module.exports = {
     'prettier/prettier': 'warn',
     //  we allow 0 warnings, so don't think prettier rules are ignored
     // this is only to show prettier issues as warnings, not errors
+    'jest/valid-describe': 'off',
+    //  too buggy rule: https://github.com/jest-community/eslint-plugin-jest/issues/203
   },
 }

@@ -1,9 +1,10 @@
 const {
   errorMiddleware,
-  stringifyJSONMiddleware,
-  convertBodyMiddleware,
+  stringifyJSONResponseMiddleware,
+  convertResponseBodyMiddleware,
   addDefaultStatusCodeMiddleware,
   throwOnFalsyResponseMiddleware,
+  parseJSONRequestBodyMiddleware,
   createLambda,
 } = require('./middlewares')
 
@@ -18,7 +19,24 @@ const INTERNAL_SERVER_ERROR_RESPONSE = {
 const KIND_RETURNED_UNDEFINED_ERROR =
   'please check that you return something in your function'
 
+const originalConsoleError = console.error
+
+const notJSONRequestBodies = [
+  'a=1&rest=test&everything=ok',
+  'null',
+  'undefined',
+  'true',
+  'false',
+  '12342',
+  'test',
+  '{test: 1}' /* missing quotes around property name */,
+]
+
 describe('errorMiddleware', () => {
+  afterEach(() => {
+    console.error = originalConsoleError
+  })
+
   it('returns 500 if handler throws error', async () => {
     const handler = async () => {
       throw new Error('test')
@@ -49,12 +67,12 @@ describe('errorMiddleware', () => {
   })
 })
 
-describe('stringifyJSONMiddleware', () => {
+describe('stringifyJSONResponseMiddleware', () => {
   it('stringifies response.body if it is object', async () => {
     const handler = async () => ({
       body: { ok: true, items: [1, 2, 3, 4] },
     })
-    const wrappedHandler = stringifyJSONMiddleware(handler)
+    const wrappedHandler = stringifyJSONResponseMiddleware(handler)
 
     const response = await wrappedHandler()
 
@@ -66,7 +84,7 @@ describe('stringifyJSONMiddleware', () => {
     const handler = async () => ({
       body: [1, 2, 3],
     })
-    const wrappedHandler = stringifyJSONMiddleware(handler)
+    const wrappedHandler = stringifyJSONResponseMiddleware(handler)
 
     try {
       await wrappedHandler()
@@ -77,10 +95,10 @@ describe('stringifyJSONMiddleware', () => {
   })
 })
 
-describe('convertBodyMiddleware', () => {
+describe('convertResponseBodyMiddleware', () => {
   it('converts body, allows just return body in lambda function', async () => {
     const handler = async () => ({ ok: true })
-    const wrappedHandler = convertBodyMiddleware(handler)
+    const wrappedHandler = convertResponseBodyMiddleware(handler)
 
     expect(await wrappedHandler()).toEqual({ body: { ok: true } })
   })
@@ -135,6 +153,38 @@ describe('throwOnFalsyResponseMiddleware', () => {
   })
 })
 
+describe('parseJSONRequestBodyMiddleware', () => {
+  it(`parses request body if it is valid json`, async () => {
+    expect.hasAssertions()
+
+    const handler = async (event) => {
+      expect(event.body).toEqual({ a: 1, items: [1, 2, 3], test: 'test' })
+    }
+    const wrappedHandler = parseJSONRequestBodyMiddleware(handler)
+
+    const request = {
+      body: '{"a":1, "items": [1, 2, 3], "test": "test"}',
+    }
+    await wrappedHandler(request)
+  })
+
+  describe('does nothing if request body is not a valid json object: ', () => {
+    it.each(notJSONRequestBodies)('%p', async (notJSONRequestBody) => {
+      expect.hasAssertions()
+
+      const handler = async (event) => {
+        expect(event.body).toEqual(notJSONRequestBody)
+      }
+      const wrappedHandler = parseJSONRequestBodyMiddleware(handler)
+
+      const request = {
+        body: notJSONRequestBody,
+      }
+      await wrappedHandler(request)
+    })
+  })
+})
+
 describe('createLambda', () => {
   it('allows just to return response body in handler', async () => {
     const handler = async () => ({ ok: true })
@@ -156,6 +206,7 @@ describe('createLambda', () => {
 
     expect(response).toEqual(INTERNAL_SERVER_ERROR_RESPONSE)
     expect(console.error).toHaveBeenCalled()
+    console.error = originalConsoleError
   })
 
   it('allows to set statusCode in handler', async () => {
@@ -181,6 +232,7 @@ describe('createLambda', () => {
     expect(console.error).toHaveBeenCalled()
     const loggedErrorMessage = console.error.mock.calls[0][0].message
     expect(loggedErrorMessage).toContain(KIND_RETURNED_UNDEFINED_ERROR)
+    console.error = originalConsoleError
   })
 
   it('allows to set headers', async () => {
@@ -222,4 +274,52 @@ describe('createLambda', () => {
       body: 'test',
     })
   })
+
+  it('runs JSON.parse on request body if it is valid json', async () => {
+    expect.hasAssertions()
+    let actualEventBody
+
+    const handler = async (event) => {
+      actualEventBody = event.body
+      return ''
+    }
+    const wrappedHandler = createLambda(handler)
+
+    const request = {
+      body: '{"a":1, "items": [1, 2, 3], "test": "test"}',
+    }
+    await wrappedHandler(request, {})
+
+    // need to do assertion here, another way:
+    // if assertion fails and exception is thrown
+    // exception is caught by error middleware and test passes
+    expect(actualEventBody).toEqual({ a: 1, items: [1, 2, 3], test: 'test' })
+  })
+
+  describe(
+    'does not run JSON.parse on request body ' +
+      'if request body is not a valid json object: ',
+    () => {
+      it.each(notJSONRequestBodies)('%p', async (notJSONRequestBody) => {
+        expect.hasAssertions()
+        let actualEventBody
+
+        const handler = async (event) => {
+          actualEventBody = event.body
+          return ''
+        }
+        const wrappedHandler = createLambda(handler)
+
+        const request = {
+          body: notJSONRequestBody,
+        }
+        await wrappedHandler(request, {})
+
+        // need to do assertion here, another way:
+        // if assertion fails and exception is thrown
+        // exception is caught by error middleware and test passes
+        expect(actualEventBody).toEqual(notJSONRequestBody)
+      })
+    }
+  )
 })

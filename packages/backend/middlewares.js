@@ -18,7 +18,19 @@ const errorMiddleware = recoveryMiddleware((error) => {
   }
 })
 
-const stringifyJSONMiddleware = (next) => async (event, context) => {
+const parseJSONRequestBodyMiddleware = (next) => async (event, context) => {
+  try {
+    const parsedBody = JSON.parse(event.body)
+    // JSON.parse('null') === null, JSON.parse('true') === true
+    if (type(parsedBody) === 'Object') {
+      // eslint-disable-next-line no-param-reassign
+      event.body = parsedBody
+    }
+  } catch (e) {} // eslint-disable-line no-empty
+  return next(event, context)
+}
+
+const stringifyJSONResponseMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
   const { body } = response
   const bodyType = type(body)
@@ -30,7 +42,7 @@ const stringifyJSONMiddleware = (next) => async (event, context) => {
   return response
 }
 
-const convertBodyMiddleware = (next) => async (event, context) => {
+const convertResponseBodyMiddleware = (next) => async (event, context) => {
   const response = await next(event, context)
   if (response.body === undefined) {
     return {
@@ -63,18 +75,20 @@ const throwOnFalsyResponseMiddleware = (next) => async (event, context) => {
 const createLambda = compose(
   waitForEmptyEventLoopMiddleware,
   addDefaultStatusCodeMiddleware,
-  stringifyJSONMiddleware,
+  stringifyJSONResponseMiddleware,
   errorMiddleware,
-  convertBodyMiddleware,
-  throwOnFalsyResponseMiddleware
+  convertResponseBodyMiddleware,
+  throwOnFalsyResponseMiddleware,
+  parseJSONRequestBodyMiddleware
 )
 
 module.exports = {
   createLambda,
   waitForEmptyEventLoopMiddleware,
   errorMiddleware,
-  stringifyJSONMiddleware,
+  stringifyJSONResponseMiddleware,
   addDefaultStatusCodeMiddleware,
-  convertBodyMiddleware,
+  convertResponseBodyMiddleware,
   throwOnFalsyResponseMiddleware,
+  parseJSONRequestBodyMiddleware,
 }
