@@ -135,6 +135,7 @@ describe('throwOnFalsyResponseMiddleware', () => {
     } catch (e) {
       expect(e).toEqual(expect.any(Error))
       expect(e.message).toContain('null')
+      expect(e.message).not.toContain(KIND_RETURNED_UNDEFINED_ERROR)
     }
   })
 
@@ -219,6 +220,20 @@ describe('createLambda', () => {
       statusCode: 401,
       body: '{"ok":false}',
     })
+  })
+
+  it('throws if handler returned null', async () => {
+    console.error = jest.fn()
+    const handler = async () => null
+    const wrappedHandler = createLambda(handler)
+
+    const response = await callHandler(wrappedHandler)
+
+    expect(response).toEqual(INTERNAL_SERVER_ERROR_RESPONSE)
+    expect(console.error).toHaveBeenCalled()
+    const loggedErrorMessage = console.error.mock.calls[0][0].message
+    expect(loggedErrorMessage).not.toContain(KIND_RETURNED_UNDEFINED_ERROR)
+    console.error = originalConsoleError
   })
 
   it('kindly throws if handler returned undefined', async () => {
