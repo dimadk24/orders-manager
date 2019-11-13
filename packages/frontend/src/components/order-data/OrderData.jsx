@@ -70,12 +70,13 @@ function OrderData() {
       <LabelledField
         label="Комментарий"
         name={`${formPrefix}.comment`}
-        renderInput={() => (
+        renderInput={(props) => (
           <textarea
             id="order-comment-area"
             cols="30"
             rows="3"
             className="comment-area"
+            {...props}
           />
         )}
       />

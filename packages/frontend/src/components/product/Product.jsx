@@ -101,8 +101,13 @@ function Product({
         label="Комментарий"
         name={`${productFormPath}.comment`}
         type="number"
-        renderInput={() => (
-          <textarea cols="30" rows="3" className="product__comment" />
+        renderInput={(props) => (
+          <textarea
+            cols="30"
+            rows="3"
+            className="product__comment"
+            {...props}
+          />
         )}
       />
     </section>
