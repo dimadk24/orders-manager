@@ -71,7 +71,7 @@ functions:
           path: /test-db
           method: any
   create-order:
-    handler: main_handlers.createOrder
+    handler: create-order_handler.handler
     #    The following are a few example events you can configure
     #    NOTE: Please make sure to change your handler code to work with those events
     #    Check the event documentation for details
