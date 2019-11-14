@@ -19,27 +19,25 @@ import LabelledField from '../../labelled-field/LabelledField'
 
 const formInitialValues = {
   products: [createProduct({ id: 1 })],
-  orderData: {
-    id: 1,
-    orderDate: moment(),
-    deliveryDate: moment(),
-    deliveryTime: '',
-    mainPhone: '',
-    additionalPhone: '',
-    address: {
-      index: '',
-      district: '',
-      city: '',
-      streetType: 'ул',
-      streetName: '',
-      house: '',
-      building: '',
-      flat: '',
-      floor: '',
-      entrance: '',
-      comment: '',
-    },
+  id: 1,
+  orderTimestamp: moment(),
+  deliveryDateTimestamp: moment(),
+  deliveryTime: '',
+  mainPhone: '',
+  additionalPhone: '',
+  address: {
+    index: '',
+    district: '',
+    city: '',
+    streetType: 'ул',
+    streetName: '',
+    house: '',
+    building: '',
+    flat: '',
+    floor: '',
+    entrance: '',
   },
+  comment: '',
 }
 
 /* eslint-disable react/prop-types */
@@ -101,7 +99,7 @@ const AddOrderPage = () => (
       <>
         <h1 className="order-id-wrapper">
           <LabelledField
-            name="orderData.id"
+            name="id"
             label="Добавить заказ №"
             type="number"
             inputClassName="order-id-input"
