@@ -16,6 +16,7 @@ import {
 } from '../../../models/product_constants'
 import moment from 'moment'
 import LabelledField from '../../labelled-field/LabelledField'
+import { saveOrder } from './addOrderPage_service'
 
 const formInitialValues = {
   products: [createProduct({ id: 1 })],
@@ -94,8 +95,14 @@ const getProductsBlock = ({ products, setFieldValue }) => (
 /* eslint-enable react/prop-types */
 
 const AddOrderPage = () => (
-  <Formik initialValues={formInitialValues} onSubmit={() => {}}>
-    {({ values, setFieldValue }) => (
+  <Formik
+    initialValues={formInitialValues}
+    onSubmit={async (values) => {
+      await saveOrder(values)
+      alert('saved') // eslint-disable-line no-alert
+    }}
+  >
+    {({ values, setFieldValue, handleSubmit }) => (
       <>
         <h1 className="order-id-wrapper">
           <LabelledField
@@ -113,7 +120,13 @@ const AddOrderPage = () => (
                 products: values.products,
                 setFieldValue,
               })}
-              <Button className="btn-save-order">Сохранить заказ</Button>
+              <Button
+                className="btn-save-order"
+                onClick={handleSubmit}
+                type="submit"
+              >
+                Сохранить заказ
+              </Button>
             </section>
             <aside>
               <OrderData />
