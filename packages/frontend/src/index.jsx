@@ -5,7 +5,7 @@ import './index.css'
 import ConnectedApp from './components/app'
 import * as serviceWorker from './serviceWorker'
 import configureStore from './configureStore'
-import isProductionMode from './utils'
+import { isProductionMode } from './utils'
 
 const store = configureStore()
 

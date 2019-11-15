@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getFullApiUrl } from '../../../utils'
 
 const serializeOrder = (order) => {
   return {
@@ -10,8 +11,7 @@ const serializeOrder = (order) => {
 
 const saveOrder = async (order) => {
   const serializedOrder = serializeOrder(order)
-  const baseBackendUrl = process.env.REACT_APP_BASE_BACKEND_URL
-  const saveOrderUrl = `${baseBackendUrl}/create-order`
+  const saveOrderUrl = getFullApiUrl('create-order')
   return axios.post(saveOrderUrl, serializedOrder)
 }
 
