@@ -43,7 +43,7 @@ const formInitialValues = {
 }
 
 /* eslint-disable react/prop-types */
-const getProductsBlock = ({ products, setFieldValue }) => (
+const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
   <FieldArray name="products">
     {({ push, remove }) => {
       const onAddProduct = () => {
@@ -85,7 +85,11 @@ const getProductsBlock = ({ products, setFieldValue }) => (
               )
             })}
           </div>
-          <Button className="btn-add-product" onClick={() => onAddProduct()}>
+          <Button
+            className="btn-add-product"
+            onClick={() => onAddProduct()}
+            disabled={isLoading}
+          >
             +
           </Button>
         </>
@@ -123,12 +127,14 @@ const AddOrderPage = () => (
                 {getProductsBlock({
                   products: values.products,
                   setFieldValue,
+                  isLoading,
                 })}
                 {isLoading && <Loader />}
                 <Button
                   className="btn-save-order"
                   onClick={handleSubmit}
                   type="submit"
+                  disabled={isLoading}
                 >
                   Сохранить заказ
                 </Button>

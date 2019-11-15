@@ -60,8 +60,8 @@
   margin-bottom: 10px;
 }
 
-.btn-add-product:hover,
-.btn-add-product:active {
+.btn-add-product:hover:not([disabled]),
+.btn-add-product:active:not([disabled]) {
   background-color: darkgreen;
   color: white;
 }
@@ -74,7 +74,12 @@
   background-color: white;
 }
 
-.btn-save-order:hover,
-.btn-save-order:active {
+.btn-save-order:hover:not([disabled]),
+.btn-save-order:active:not([disabled]) {
   background-color: #c3cbea;
+}
+
+.btn-save-order[disabled],
+.btn-add-product[disabled] {
+  cursor: default;
 }
