@@ -1,0 +1,9 @@
+@import '~spinkit/spinkit.css';
+
+.loader {
+  padding: 5px;
+}
+
+.sk-circle {
+  --sk-size: 35px;
+}

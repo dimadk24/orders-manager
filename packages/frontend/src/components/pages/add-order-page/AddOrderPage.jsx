@@ -17,6 +17,7 @@ import {
 import moment from 'moment'
 import LabelledField from '../../labelled-field/LabelledField'
 import { saveOrder } from './addOrderPage_service'
+import Loader from '../../utils/Loader/Loader'
 
 const formInitialValues = {
   products: [createProduct({ id: 1 })],
@@ -97,44 +98,49 @@ const getProductsBlock = ({ products, setFieldValue }) => (
 const AddOrderPage = () => (
   <Formik
     initialValues={formInitialValues}
-    onSubmit={async (values) => {
+    onSubmit={async (values, actions) => {
       await saveOrder(values)
       alert('saved') // eslint-disable-line no-alert
+      actions.setSubmitting(false)
     }}
   >
-    {({ values, setFieldValue, handleSubmit }) => (
-      <>
-        <h1 className="order-id-wrapper">
-          <LabelledField
-            name="id"
-            label="Добавить заказ №"
-            type="number"
-            inputClassName="order-id-input"
-            centered
-          />
-        </h1>
-        <main>
-          <Form className="form-wrapper">
-            <section className="main-content-wrapper">
-              {getProductsBlock({
-                products: values.products,
-                setFieldValue,
-              })}
-              <Button
-                className="btn-save-order"
-                onClick={handleSubmit}
-                type="submit"
-              >
-                Сохранить заказ
-              </Button>
-            </section>
-            <aside>
-              <OrderData />
-            </aside>
-          </Form>
-        </main>
-      </>
-    )}
+    {({ values, setFieldValue, handleSubmit, isSubmitting, isValidating }) => {
+      const isLoading = isSubmitting && !isValidating
+      return (
+        <>
+          <h1 className="order-id-wrapper">
+            <LabelledField
+              name="id"
+              label="Добавить заказ №"
+              type="number"
+              inputClassName="order-id-input"
+              centered
+            />
+          </h1>
+          <main>
+            <Form className="form-wrapper">
+              <section className="main-content-wrapper">
+                {getProductsBlock({
+                  products: values.products,
+                  setFieldValue,
+                })}
+                {isLoading && <Loader />}
+                <Button
+                  className="btn-save-order"
+                  onClick={handleSubmit}
+                  type="submit"
+                >
+                  Сохранить заказ
+                </Button>
+              </section>
+              <aside>
+                <OrderData />
+              </aside>
+            </Form>
+          </main>
+        </>
+      )
+    }}
   </Formik>
 )
 
