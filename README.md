@@ -45,6 +45,13 @@ There's no magic, just [yarn workspaces](https://yarnpkg.com/en/docs/workspaces)
 
 Frontend is built on [ReactJS](http://reactjs.org/)
 and was bootstrapped with [create-react-app](https://create-react-app.dev/).
+To launch frontend:
+
+- Copy `packages/frontend/.env.example` to `packages/frontend/.env`
+- In `packages/frontend/.env` replace fake api url with real one.
+You can use either local backend (`http://localhost:3001`)
+or dev instance backend (please ask for the url)
+- Run `yarn start:frontend`
 
 ## Working with backend
 
