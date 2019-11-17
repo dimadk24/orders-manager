@@ -1,4 +1,6 @@
 const { MongoClient } = require('mongodb')
+const config = require('./config')
+const matcher = require('matcher')
 
 const getEnvironment = () => process.env
 
@@ -16,4 +18,9 @@ const getMongoClient = async () => {
   return mongoClient
 }
 
-module.exports = { getEnvironment, getMongoClient }
+const isAllowedOrigin = (origin) => {
+  const { allowedOrigins } = config
+  return Boolean(matcher([origin], allowedOrigins).length)
+}
+
+module.exports = { getEnvironment, getMongoClient, isAllowedOrigin }

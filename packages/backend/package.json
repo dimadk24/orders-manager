@@ -16,6 +16,7 @@
     "url": "https://github.com/DimaDK24/orders-manager/issues"
   },
   "dependencies": {
+    "matcher": "^2.0.0",
     "mongodb": "^3.3.3",
     "serverless-compose": "^2.4.0",
     "type-detect": "^4.0.8"
