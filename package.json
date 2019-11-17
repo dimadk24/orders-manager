@@ -33,7 +33,8 @@
     "lint": "yarn lint:code && yarn lint:commits",
     "start:storybook": "yarn workspace frontend start-storybook",
     "build:storybook": "yarn workspace frontend build-storybook",
-    "deploy:backend": "yarn workspace backend deploy"
+    "deploy:backend": "yarn workspace backend deploy",
+    "deploy:backend:feature": "yarn workspace backend deploy:feature"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",

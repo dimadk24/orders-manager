@@ -6,6 +6,7 @@
     "start": "yarn launch-local",
     "launch-local": "sls offline",
     "deploy": "sls deploy",
+    "deploy:feature": "yarn deploy -s feature",
     "test": "jest"
   },
   "repository": {
