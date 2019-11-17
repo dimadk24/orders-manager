@@ -64,27 +64,36 @@ functions:
       - http:
           path: /
           method: any
+          cors:
+            origin: '*'
+            allowCredentials: true
   test-database:
     handler: dev_handlers.testDatabase
     events:
       - http:
           path: /test-db
           method: any
+          cors:
+            origin: '*'
+            allowCredentials: true
   create-order:
     handler: create-order_handler.handler
-    #    The following are a few example events you can configure
-    #    NOTE: Please make sure to change your handler code to work with those events
-    #    Check the event documentation for details
     events:
       - http:
           path: create-order
           method: post
+          cors:
+            origin: '*'
+            allowCredentials: true
   get-orders-count:
     handler: get-orders-count_handler.handler
     events:
       - http:
           path: /get-orders-count
           method: get
+          cors:
+            origin: '*'
+            allowCredentials: true
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)

@@ -1,1 +1,4 @@
 /build
+
+# environment config
+.env

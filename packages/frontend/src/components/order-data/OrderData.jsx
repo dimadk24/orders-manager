@@ -4,29 +4,22 @@ import LabelledDateInput from '../labelled-date-input'
 import LabelledField from '../labelled-field/LabelledField'
 
 function OrderData() {
-  const formPrefix = 'orderData'
-  const addressPrefix = `${formPrefix}.address`
+  const addressPrefix = 'address'
   return (
     <div className="order-data">
       <LabelledField
-        name={`${formPrefix}.orderDate`}
+        name="orderTimestamp"
         label="Дата заказа"
         Component={LabelledDateInput}
       />
       <LabelledField
-        name={`${formPrefix}.deliveryDate`}
+        name="deliveryDateTimestamp"
         label="Дата доставки"
         Component={LabelledDateInput}
       />
-      <LabelledField
-        name={`${formPrefix}.deliveryTime`}
-        label="Время доставки"
-      />
-      <LabelledField name={`${formPrefix}.mainPhone`} label="Телефон" />
-      <LabelledField
-        name={`${formPrefix}.additionalPhone`}
-        label="Доп. телефон"
-      />
+      <LabelledField name="deliveryTime" label="Время доставки" />
+      <LabelledField name="mainPhone" label="Телефон" />
+      <LabelledField name="additionalPhone" label="Доп. телефон" />
       <LabelledField
         name={`${addressPrefix}.index`}
         label="Индекс"
@@ -69,13 +62,14 @@ function OrderData() {
       />
       <LabelledField
         label="Комментарий"
-        name={`${formPrefix}.comment`}
-        renderInput={() => (
+        name="comment"
+        renderInput={(props) => (
           <textarea
             id="order-comment-area"
             cols="30"
             rows="3"
             className="comment-area"
+            {...props}
           />
         )}
       />

@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './reducers/root_reducer'
-import isProductionMode from './utils'
+import { isProductionMode } from './utils'
 
 function configureStore() {
   const store = createStore(rootReducer, composeWithDevTools())

@@ -1,4 +1,5 @@
 const type = require('type-detect')
+const { isAllowedOrigin } = require('./utils')
 const { compose, recoveryMiddleware } = require('serverless-compose')
 
 const waitForEmptyEventLoopMiddleware = (next) => (event, context) => {
@@ -17,6 +18,19 @@ const errorMiddleware = recoveryMiddleware((error) => {
     },
   }
 })
+
+const corsHeadersMiddleware = (next) => async (event, context) => {
+  const response = await next(event, context)
+  if (!event.headers) return response
+  const { origin } = event.headers
+  if (isAllowedOrigin(origin))
+    response.headers = {
+      ...response.headers,
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Credentials': true,
+    }
+  return response
+}
 
 const parseJSONRequestBodyMiddleware = (next) => async (event, context) => {
   try {
@@ -75,6 +89,7 @@ const throwOnFalsyResponseMiddleware = (next) => async (event, context) => {
 const createLambda = compose(
   waitForEmptyEventLoopMiddleware,
   addDefaultStatusCodeMiddleware,
+  corsHeadersMiddleware,
   stringifyJSONResponseMiddleware,
   errorMiddleware,
   convertResponseBodyMiddleware,
