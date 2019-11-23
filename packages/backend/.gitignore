@@ -1,3 +1,4 @@
 # Serverless stuff
 .serverless
 .env
+.env.test.local
