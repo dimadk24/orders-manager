@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Product from '../../product/Product'
 import Button from '../../button'
 import OrderData from '../../order-data'
@@ -16,31 +16,8 @@ import {
 } from '../../../models/product_constants'
 import moment from 'moment'
 import LabelledField from '../../labelled-field/LabelledField'
-import { saveOrder } from './addOrderPage_service'
+import { saveOrder, getOrdersCount } from './addOrderPage_service'
 import Loader from '../../utils/Loader/Loader'
-
-const formInitialValues = {
-  products: [createProduct({ id: 1 })],
-  id: 1,
-  orderTimestamp: moment(),
-  deliveryDateTimestamp: moment(),
-  deliveryTime: '',
-  mainPhone: '',
-  additionalPhone: '',
-  address: {
-    index: '',
-    district: '',
-    city: '',
-    streetType: 'ул',
-    streetName: '',
-    house: '',
-    building: '',
-    flat: '',
-    floor: '',
-    entrance: '',
-  },
-  comment: '',
-}
 
 /* eslint-disable react/prop-types */
 const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
@@ -99,56 +76,100 @@ const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
 )
 /* eslint-enable react/prop-types */
 
-const AddOrderPage = () => (
-  <Formik
-    initialValues={formInitialValues}
-    onSubmit={async (values, actions) => {
-      await saveOrder(values)
-      alert('saved') // eslint-disable-line no-alert
-      actions.setSubmitting(false)
-    }}
-  >
-    {({ values, setFieldValue, handleSubmit, isSubmitting, isValidating }) => {
-      const isLoading = isSubmitting && !isValidating
-      return (
-        <>
-          <h1 className="order-id-wrapper">
-            <LabelledField
-              name="id"
-              label="Добавить заказ №"
-              type="number"
-              inputClassName="order-id-input"
-              centered
-            />
-          </h1>
-          <main>
-            <Form className="form-wrapper">
-              <section className="main-content-wrapper">
-                {getProductsBlock({
-                  products: values.products,
-                  setFieldValue,
-                  isLoading,
-                })}
-                {isLoading && <Loader />}
-                <Button
-                  className="btn-save-order"
-                  onClick={handleSubmit}
-                  type="submit"
-                  disabled={isLoading}
-                >
-                  Сохранить заказ
-                </Button>
-              </section>
-              <aside>
-                <OrderData />
-              </aside>
-            </Form>
-          </main>
-        </>
-      )
-    }}
-  </Formik>
-)
+const AddOrderPage = () => {
+  const [orderIdLoader, setOrderIdLoader] = useState(false)
+
+  const formInitialValues = {
+    products: [createProduct({ id: 1 })],
+    id: 0,
+    orderTimestamp: moment(),
+    deliveryDateTimestamp: moment(),
+    deliveryTime: '',
+    mainPhone: '',
+    additionalPhone: '',
+    address: {
+      index: '',
+      district: '',
+      city: '',
+      streetType: 'ул',
+      streetName: '',
+      house: '',
+      building: '',
+      flat: '',
+      floor: '',
+      entrance: '',
+    },
+    comment: '',
+  }
+
+  useEffect(() => {
+    async function loadOrderId() {
+      if (!orderIdLoader) {
+        const ordersCount = await getOrdersCount()
+        formInitialValues.id = ordersCount + 1
+        setOrderIdLoader(true)
+      }
+    }
+    loadOrderId()
+  }, [])
+
+  return (
+    <Formik
+      initialValues={formInitialValues}
+      onSubmit={async (values, actions) => {
+        await saveOrder(values)
+        alert('saved') // eslint-disable-line no-alert
+        actions.setSubmitting(false)
+      }}
+    >
+      {({
+        values,
+        setFieldValue,
+        handleSubmit,
+        isSubmitting,
+        isValidating,
+      }) => {
+        const isLoading = isSubmitting && !isValidating
+        return (
+          <>
+            <h1 className="order-id-wrapper">
+              <LabelledField
+                name="id"
+                label="Добавить заказ №"
+                type="number"
+                inputClassName="order-id-input"
+                centered
+              />
+            </h1>
+            <main>
+              <Form className="form-wrapper">
+                <section className="main-content-wrapper">
+                  {getProductsBlock({
+                    products: values.products,
+                    setFieldValue,
+                    isLoading,
+                  })}
+                  {isLoading && <Loader />}
+                  <Button
+                    className="btn-save-order"
+                    onClick={handleSubmit}
+                    type="submit"
+                    disabled={isLoading}
+                  >
+                    Сохранить заказ
+                  </Button>
+                </section>
+                <aside>
+                  <OrderData />
+                </aside>
+              </Form>
+            </main>
+          </>
+        )
+      }}
+    </Formik>
+  )
+}
 
 AddOrderPage.propTypes = {}
 
