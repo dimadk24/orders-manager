@@ -16,11 +16,11 @@ async function findOrders(filters) {
       ],
     })
   }
-  if (filters.city) queryFilters.push(QueryUtils.includes('city', filters.city))
+  if (filters.city)
+    queryFilters.push(QueryUtils.includes('address.city', filters.city))
   if (filters.street)
-    queryFilters.push(QueryUtils.includes('street', filters.street))
-  if (filters.house)
-    queryFilters.push(QueryUtils.includes('house', filters.house))
+    queryFilters.push(QueryUtils.includes('address.street', filters.street))
+  if (filters.house) queryFilters.push({ 'address.house': filters.house })
   return client
     .db()
     .collection('orders')
