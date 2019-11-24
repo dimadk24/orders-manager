@@ -15,4 +15,10 @@ const saveOrder = async (order) => {
   return axios.post(saveOrderUrl, serializedOrder)
 }
 
-export { saveOrder, serializeOrder }
+const getOrdersCount = async () => {
+  const url = getFullApiUrl('get-orders-count')
+  const response = await axios.get(url)
+  return response.data.count
+}
+
+export { saveOrder, serializeOrder, getOrdersCount }
