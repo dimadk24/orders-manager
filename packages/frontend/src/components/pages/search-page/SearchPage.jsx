@@ -4,6 +4,7 @@ import Button from '../../button/Button'
 import OrderTable from '../../order-table/OrderTable'
 import { Form, Formik } from 'formik'
 import LabelledField from '../../labelled-field/LabelledField'
+import getOrder from './searchPage_service'
 
 const rows = [
   {
@@ -31,9 +32,11 @@ const SearchPage = () => {
     <>
       <Formik
         initialValues={initialFormState}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           // eslint-disable-next-line no-console
           console.log(JSON.stringify(values, null, 2))
+          // eslint-disable-next-line no-console
+          console.log(await getOrder(values.id))
         }}
       >
         {() => (
