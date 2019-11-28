@@ -94,6 +94,15 @@ functions:
           cors:
             origin: '*'
             allowCredentials: true
+  get-order:
+    handler: get-order_handler.handler
+    events:
+      - http:
+          path: /get-order
+          method: post
+          cors:
+            origin: '*'
+            allowCredentials: true
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
