@@ -4,7 +4,7 @@ import Button from '../../button/Button'
 import OrderTable from '../../order-table/OrderTable'
 import { Form, Formik } from 'formik'
 import LabelledField from '../../labelled-field/LabelledField'
-import getOrder from './searchPage_service'
+import { getOrder } from './searchPage_service'
 
 const rows = [
   {

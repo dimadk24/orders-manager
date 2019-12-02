@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getFullApiUrl } from '../../../utils'
+import moment from 'moment'
 
 const getOrder = async (searchId) => {
   const url = getFullApiUrl('get-order')
@@ -7,4 +8,12 @@ const getOrder = async (searchId) => {
   return response.data
 }
 
-export default getOrder
+const getDateOrder = (order) => {
+  return {
+    ...order,
+    orderTimestamp: moment().millisecond(order.orderTimestamp),
+    deliveryDateTimestamp: moment().millisecond(order.deliveryDateTimestamp),
+  }
+}
+
+export { getOrder, getDateOrder }

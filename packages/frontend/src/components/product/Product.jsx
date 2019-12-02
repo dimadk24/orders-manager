@@ -18,6 +18,8 @@ function Product({
   onChooseProductType,
   optionsMode,
   parameters,
+  // eslint-disable-next-line react/prop-types
+  products,
   formValues,
 }) {
   const productFormPath = `products[${index}]`
@@ -47,7 +49,7 @@ function Product({
             else replace(foundItemIndex, { name, value })
           }
 
-          return parameters.map((parameter) => (
+          return parameters.map((parameter, ind) => (
             <ProductParameter
               options={parameter.options}
               label={parameter.name}
@@ -55,6 +57,8 @@ function Product({
               onChange={(value) =>
                 onChooseParameter({ name: parameter.name, value })
               }
+              // eslint-disable-next-line react/prop-types
+              currentParameter={products ? products['0'].parameters[ind] : null}
             />
           ))
         }}

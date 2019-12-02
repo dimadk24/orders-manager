@@ -5,9 +5,20 @@ import './ProductParameter.css'
 
 const ProductParameter = ({ options, onChange, ...other }) => {
   const [showDefaultValue, setShowDefaultValue] = useState(true)
+  const { currentParameter } = other
+  // console.log(currentParameter)
+
+  let currentValue
+
+  if (currentParameter) {
+    currentValue = options.find(
+      (option) => option.value === currentParameter.value
+    )
+  }
 
   const selectInput = (
     <select
+      value={currentValue ? currentValue.value : '0'}
       onChange={(e) => {
         setShowDefaultValue(false)
         onChange(e.target.value)
