@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper'
 import './OrderTable.css'
 
 export default function OrderTable({ rows }) {
-  return (
+  return rows.length ? (
     <Paper className="order-table__root">
       <Table className="order-table__table">
         <TableHead>
@@ -23,13 +23,15 @@ export default function OrderTable({ rows }) {
           {rows.map((row) => (
             <TableRow key={row.id}>
               <TableCell align="center">{row.id}</TableCell>
-              <TableCell align="center">{row.phone}</TableCell>
-              <TableCell align="center">{row.street}</TableCell>
+              <TableCell align="center">{row.mainPhone}</TableCell>
+              <TableCell align="center">{row.address.streetName}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </Paper>
+  ) : (
+    <p className="no-orders">Таких заказов нет, проверь критерии поиска</p>
   )
 }
 

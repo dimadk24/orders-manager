@@ -1,6 +1,8 @@
 const { getMongoClient } = require('./utils')
 const { findOrders } = require('./orders-logic')
 
+jest.setTimeout(15000)
+
 describe('orders-logic', () => {
   let client
 
@@ -13,6 +15,10 @@ describe('orders-logic', () => {
 
   beforeAll(async () => {
     client = await getMongoClient()
+  })
+
+  afterAll(async () => {
+    await client.close()
   })
 
   afterEach(async () => {
@@ -84,39 +90,39 @@ describe('orders-logic', () => {
       )
     })
 
-    it('find orders by street case insensitively', async () => {
+    it('find orders by streetName case insensitively', async () => {
       await insertOrders([
         {
-          address: { street: 'Nemiga' },
+          address: { streetName: 'Nemiga' },
         },
         {
-          address: { street: 'nemiga str.' },
+          address: { streetName: 'nemiga str.' },
         },
         {
-          address: { street: 'str. Nemiga' },
+          address: { streetName: 'str. Nemiga' },
         },
         {
           id: 1,
         },
         {
-          address: { street: 'golodeda' },
+          address: { streetName: 'golodeda' },
         },
         {
-          address: { street: 'Nemigo' },
+          address: { streetName: 'Nemigo' },
         },
       ])
 
-      const foundItems = await findOrders({ street: 'nemiga' })
+      const foundItems = await findOrders({ streetName: 'nemiga' })
 
       expect(foundItems).toHaveLength(3)
       expect(foundItems[0]).toEqual(
-        expect.objectContaining({ address: { street: 'Nemiga' } })
+        expect.objectContaining({ address: { streetName: 'Nemiga' } })
       )
       expect(foundItems[1]).toEqual(
-        expect.objectContaining({ address: { street: 'nemiga str.' } })
+        expect.objectContaining({ address: { streetName: 'nemiga str.' } })
       )
       expect(foundItems[2]).toEqual(
-        expect.objectContaining({ address: { street: 'str. Nemiga' } })
+        expect.objectContaining({ address: { streetName: 'str. Nemiga' } })
       )
     })
 
@@ -150,36 +156,36 @@ describe('orders-logic', () => {
       )
     })
 
-    it('finds orders by id and street', async () => {
+    it('finds orders by id and streetName', async () => {
       await insertOrders([
         {
           id: 1,
           address: {
-            street: 'Nemiga',
+            streetName: 'Nemiga',
           },
         },
         {
           id: 1,
           address: {
-            street: 'Golodeda',
+            streetName: 'Golodeda',
           },
         },
         {
           id: 10,
           address: {
-            street: 'Nemiga',
+            streetName: 'Nemiga',
           },
         },
       ])
 
-      const foundItems = await findOrders({ street: 'nemiga', id: 1 })
+      const foundItems = await findOrders({ streetName: 'nemiga', id: 1 })
 
       expect(foundItems).toHaveLength(1)
       expect(foundItems[0]).toEqual(
         expect.objectContaining({
           id: 1,
           address: {
-            street: 'Nemiga',
+            streetName: 'Nemiga',
           },
         })
       )

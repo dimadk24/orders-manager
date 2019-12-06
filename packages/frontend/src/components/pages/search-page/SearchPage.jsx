@@ -1,23 +1,10 @@
-import React from 'react'
 import './SearchPage.css'
 import Button from '../../button/Button'
 import OrderTable from '../../order-table/OrderTable'
 import { Form, Formik } from 'formik'
 import LabelledField from '../../labelled-field/LabelledField'
-import getOrder from './searchPage_service'
-
-const rows = [
-  {
-    id: 1,
-    phone: '+375298757099',
-    street: 'Немига',
-  },
-  {
-    id: 1234,
-    phone: '+375441234876',
-    street: 'Победителей',
-  },
-]
+import { findOrders } from './searchPage_service'
+import React, { useState } from 'react'
 
 const initialFormState = {
   id: '',
@@ -28,15 +15,15 @@ const initialFormState = {
 }
 
 const SearchPage = () => {
+  const [rows, setRows] = useState('')
+
   return (
     <>
       <Formik
         initialValues={initialFormState}
         onSubmit={async (values) => {
-          // eslint-disable-next-line no-console
-          console.log(JSON.stringify(values, null, 2))
-          // eslint-disable-next-line no-console
-          console.log(await getOrder(values.id))
+          const orders = await findOrders(values)
+          setRows(orders)
         }}
       >
         {() => (
@@ -77,7 +64,7 @@ const SearchPage = () => {
           </Form>
         )}
       </Formik>
-      <OrderTable rows={rows} />
+      {rows && <OrderTable rows={rows} />}
     </>
   )
 }

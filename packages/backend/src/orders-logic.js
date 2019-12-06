@@ -4,10 +4,11 @@ const { getMongoClient } = require('./utils')
 async function findOrders(filters) {
   const client = await getMongoClient()
   const queryFilters = []
-  if (filters.id)
+  if (filters.id) {
     queryFilters.push({
       id: filters.id,
     })
+  }
   if (filters.phone) {
     queryFilters.push({
       $or: [
@@ -18,9 +19,13 @@ async function findOrders(filters) {
   }
   if (filters.city)
     queryFilters.push(QueryUtils.includes('address.city', filters.city))
-  if (filters.street)
-    queryFilters.push(QueryUtils.includes('address.street', filters.street))
-  if (filters.house) queryFilters.push({ 'address.house': filters.house })
+  if (filters.streetName)
+    queryFilters.push(
+      QueryUtils.includes('address.streetName', filters.streetName)
+    )
+  if (filters.house) {
+    queryFilters.push({ 'address.house': filters.house })
+  }
   return client
     .db()
     .collection('orders')
