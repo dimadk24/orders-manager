@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "escape-string-regexp": "^2.0.0",
     "matcher": "^2.0.0",
     "mongodb": "^3.3.3",
     "serverless-compose": "^2.4.0",
