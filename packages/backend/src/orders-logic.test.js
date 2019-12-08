@@ -184,5 +184,40 @@ describe('orders-logic', () => {
         })
       )
     })
+
+    const propertiesToTest = ['mainPhone', 'additionalPhone']
+
+    propertiesToTest.forEach((propertyName) => {
+      it(`finds orders by ${propertyName}`, async () => {
+        await insertOrders([
+          {
+            [propertyName]: '+123',
+          },
+          {
+            [propertyName]: '+12345',
+          },
+          {
+            [propertyName]: '+987',
+          },
+          {
+            [propertyName]: undefined,
+          },
+        ])
+
+        const foundItems = await findOrders({ phone: '+123' })
+
+        expect(foundItems).toHaveLength(2)
+        expect(foundItems[0]).toEqual(
+          expect.objectContaining({
+            [propertyName]: '+123',
+          })
+        )
+        expect(foundItems[1]).toEqual(
+          expect.objectContaining({
+            [propertyName]: '+12345',
+          })
+        )
+      })
+    })
   })
 })
