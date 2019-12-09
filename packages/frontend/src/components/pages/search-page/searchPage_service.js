@@ -7,4 +7,13 @@ const getOrder = async (searchId) => {
   return response.data
 }
 
-export default getOrder
+const findOrders = async (searchData) => {
+  if (searchData.id) {
+    Object.assign(searchData, { id: +searchData.id })
+  }
+  const url = getFullApiUrl('search-orders')
+  const response = await axios.post(url, { filters: searchData })
+  return response.data.orders
+}
+
+export { getOrder, findOrders }

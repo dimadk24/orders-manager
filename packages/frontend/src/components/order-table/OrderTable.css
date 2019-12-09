@@ -6,3 +6,7 @@
 .order-table__table {
   min-width: 400px;
 }
+
+.no-orders {
+  text-align: center;
+}
