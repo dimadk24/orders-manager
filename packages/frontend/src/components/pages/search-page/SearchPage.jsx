@@ -5,6 +5,7 @@ import { Form, Formik } from 'formik'
 import LabelledField from '../../labelled-field/LabelledField'
 import { findOrders } from './searchPage_service'
 import React, { useState } from 'react'
+import LabelledPhoneInput from '../../LabelledPhoneInput/LabelledPhoneInput'
 
 const initialFormState = {
   id: '',
@@ -34,12 +35,19 @@ const SearchPage = () => {
               centered
               name="id"
             />
-            <LabelledField
-              label="Телефон"
-              labelClassName="search-page-form-field"
-              centered
-              name="phone"
-            />
+
+            <div className="labelled-search-phone-input__label">
+              <label htmlFor="phone">Телефон</label>
+              <LabelledField
+                name="phone"
+                inputProps={{
+                  className: 'labelled-phone-input__input',
+                  id: 'phone',
+                }}
+                Component={LabelledPhoneInput}
+              />
+            </div>
+
             <LabelledField
               label="Город"
               labelClassName="search-page-form-field"

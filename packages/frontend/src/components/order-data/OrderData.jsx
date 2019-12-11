@@ -2,6 +2,7 @@ import React from 'react'
 import './OrderData.css'
 import LabelledDateInput from '../labelled-date-input'
 import LabelledField from '../labelled-field/LabelledField'
+import LabelledPhoneInput from '../LabelledPhoneInput/LabelledPhoneInput'
 
 function OrderData() {
   const addressPrefix = 'address'
@@ -18,8 +19,30 @@ function OrderData() {
         Component={LabelledDateInput}
       />
       <LabelledField name="deliveryTime" label="Время доставки" />
-      <LabelledField name="mainPhone" label="Телефон" />
-      <LabelledField name="additionalPhone" label="Доп. телефон" />
+      <div className="labelled-phone-input__label">
+        <label htmlFor="mainPhone">Телефон</label>
+        <LabelledField
+          name="mainPhone"
+          inputProps={{
+            className: 'labelled-phone-input__input',
+            id: 'mainPhone',
+          }}
+          Component={LabelledPhoneInput}
+        />
+      </div>
+
+      <div className="labelled-phone-input__label">
+        <label htmlFor="additionalPhone"> Доп. телефон</label>
+        <LabelledField
+          name="additionalPhone"
+          inputProps={{
+            className: 'labelled-phone-input__input',
+            id: 'additionalPhone',
+          }}
+          Component={LabelledPhoneInput}
+        />
+      </div>
+
       <LabelledField
         name={`${addressPrefix}.index`}
         label="Индекс"
