@@ -18,10 +18,19 @@
   border-radius: 5px;
 }
 
+.labelled-search-phone-input__label {
+  display: flex;
+}
+
 @media (max-width: 980px) {
   .search-page-form-field {
     display: flex;
     flex-direction: column;
+  }
+
+  .labelled-search-phone-input__label {
+    display: grid;
+    justify-items: center;
   }
 }
 

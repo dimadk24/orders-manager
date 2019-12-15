@@ -1,0 +1,13 @@
+.react-tel-input {
+  margin-left: 10px;
+  width: 190px;
+}
+
+.labelled-phone-input__input {
+  width: 150px;
+  margin-left: 40px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid black;
+  text-align: left;
+}
