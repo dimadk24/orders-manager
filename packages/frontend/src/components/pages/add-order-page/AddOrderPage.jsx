@@ -111,7 +111,7 @@ const AddOrderPage = () => {
       }
     }
     loadOrderId()
-  }, [])
+  })
 
   return (
     <Formik
