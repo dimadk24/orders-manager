@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Product from '../../product/Product'
 import Button from '../../button'
 import OrderData from '../../order-data'
@@ -15,9 +15,9 @@ import {
   mockProductTypes,
 } from '../../../models/product_constants'
 import moment from 'moment'
-import LabelledField from '../../labelled-field/LabelledField'
-import { saveOrder, getOrdersCount } from './addOrderPage_service'
+import { saveOrder } from './addOrderPage_service'
 import Loader from '../../utils/Loader/Loader'
+import OrderIdField from '../../order-id-field/OrderIdField'
 
 /* eslint-disable react/prop-types */
 const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
@@ -77,8 +77,6 @@ const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
 /* eslint-enable react/prop-types */
 
 const AddOrderPage = () => {
-  const [orderIdLoader, setOrderIdLoader] = useState(false)
-
   const formInitialValues = {
     products: [createProduct({ id: 1 })],
     id: 0,
@@ -102,17 +100,6 @@ const AddOrderPage = () => {
     comment: '',
   }
 
-  useEffect(() => {
-    async function loadOrderId() {
-      if (!orderIdLoader) {
-        const ordersCount = await getOrdersCount()
-        formInitialValues.id = ordersCount + 1
-        setOrderIdLoader(true)
-      }
-    }
-    loadOrderId()
-  })
-
   return (
     <Formik
       initialValues={formInitialValues}
@@ -133,13 +120,7 @@ const AddOrderPage = () => {
         return (
           <>
             <h1 className="order-id-wrapper">
-              <LabelledField
-                name="id"
-                label="Добавить заказ №"
-                type="number"
-                inputClassName="order-id-input"
-                centered
-              />
+              <OrderIdField/>
             </h1>
             <main>
               <Form className="form-wrapper">
