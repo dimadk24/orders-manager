@@ -6,6 +6,13 @@ const serializeOrder = (order) => {
     ...order,
     orderTimestamp: order.orderTimestamp.unix(),
     deliveryDateTimestamp: order.deliveryDateTimestamp.unix(),
+    products: order.products.map((product) => ({
+      ...product,
+      parameters: product.parameters.map((parameter) => ({
+        name: parameter.name,
+        value: parameter.value,
+      })),
+    })),
   }
 }
 

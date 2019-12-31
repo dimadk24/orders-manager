@@ -10,10 +10,7 @@ import {
   getOptionsMode,
   getProductArrayIndex,
 } from '../../../models/product_utils'
-import {
-  mockProductParameters,
-  mockProductTypes,
-} from '../../../models/product_constants'
+import { mockProductTypes } from '../../../models/product_constants'
 import moment from 'moment'
 import { saveOrder } from './addOrderPage_service'
 import Loader from '../../utils/Loader/Loader'
@@ -47,7 +44,6 @@ const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
                   key={product.id}
                   index={index}
                   types={mockProductTypes}
-                  parameters={mockProductParameters}
                   optionsMode={getOptionsMode(product)}
                   onRemove={() => onRemoveProduct(product.id)}
                   onChooseProductType={({ id: typeId, value }) =>
@@ -57,7 +53,6 @@ const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
                       value,
                     })
                   }
-                  formValues={product}
                 />
               )
             })}
@@ -120,7 +115,7 @@ const AddOrderPage = () => {
         return (
           <>
             <h1 className="order-id-wrapper">
-              <OrderIdField/>
+              <OrderIdField />
             </h1>
             <main>
               <Form className="form-wrapper">

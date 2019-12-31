@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import LabelledInput from '../../labelled-input'
 import './ProductParameter.css'
 
-const ProductParameter = ({ options, onChange, ...other }) => {
-  const [showDefaultValue, setShowDefaultValue] = useState(true)
-
+const ProductParameter = ({
+  options,
+  onChange,
+  value: parameterValue,
+  ...other
+}) => {
   const selectInput = (
-    <select
-      onChange={(e) => {
-        setShowDefaultValue(false)
-        onChange(e.target.value)
-      }}
-    >
-      {showDefaultValue && <option value="0">Выбрать</option>}
+    <select onChange={(e) => onChange(e.target.value)} value={parameterValue}>
       {options.map(({ value, text }) => {
         return (
           <option value={value} key={value}>
@@ -41,10 +38,12 @@ ProductParameter.propTypes = {
     })
   ).isRequired,
   onChange: PropTypes.func,
+  value: PropTypes.string,
 }
 
 ProductParameter.defaultProps = {
   onChange: () => {},
+  value: '',
 }
 
 export default ProductParameter
