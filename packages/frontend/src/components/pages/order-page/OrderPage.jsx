@@ -21,7 +21,11 @@ const OrderPage = ({ clientId, orderId }) => {
     loadOrderData()
   }, [orderId])
   return loaded ? (
-    <Order formInitialValues={formInitialValues} idFieldLabel="Заказ №" />
+    <Order
+      formInitialValues={formInitialValues}
+      idFieldLabel="Заказ №"
+      canEditId={false}
+    />
   ) : (
     <Loader />
   )

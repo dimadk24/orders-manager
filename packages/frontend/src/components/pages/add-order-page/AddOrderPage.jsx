@@ -31,6 +31,7 @@ const AddOrderPage = () => {
     <Order
       formInitialValues={formInitialValues}
       idFieldLabel="Добавить заказ №"
+      canEditId
     />
   )
 }

@@ -4,7 +4,7 @@ import { useFormikContext } from 'formik'
 import { getOrdersCount } from '../pages/add-order-page/addOrderPage_service'
 import PropTypes from 'prop-types'
 
-const OrderIdField = ({ label }) => {
+const OrderIdField = ({ label, editable }) => {
   const { setFieldValue, values } = useFormikContext()
   useEffect(() => {
     const loadOrderId = async () => {
@@ -14,6 +14,7 @@ const OrderIdField = ({ label }) => {
     }
     if (!values.id) loadOrderId()
   }, [setFieldValue, values.id])
+  if (!editable) return label + values.id
   return (
     <LabelledField
       name="id"
@@ -27,10 +28,12 @@ const OrderIdField = ({ label }) => {
 
 OrderIdField.propTypes = {
   label: PropTypes.string,
+  editable: PropTypes.bool,
 }
 
 OrderIdField.defaultProps = {
   label: '',
+  editable: true,
 }
 
 export default OrderIdField
