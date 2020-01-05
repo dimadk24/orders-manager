@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getFullApiUrl } from '../../../utils'
+import moment from 'moment'
 
 const serializeOrder = (order) => {
   return {
@@ -16,6 +17,14 @@ const serializeOrder = (order) => {
   }
 }
 
+const deserializeOrder = (order) => {
+  return {
+    ...order,
+    orderTimestamp: moment().millisecond(order.orderTimestamp),
+    deliveryDateTimestamp: moment().millisecond(order.deliveryDateTimestamp),
+  }
+}
+
 const saveOrder = async (order) => {
   const serializedOrder = serializeOrder(order)
   const saveOrderUrl = getFullApiUrl('create-order')
@@ -28,4 +37,4 @@ const getOrdersCount = async () => {
   return response.data.count
 }
 
-export { saveOrder, serializeOrder, getOrdersCount }
+export { saveOrder, serializeOrder, deserializeOrder, getOrdersCount }
