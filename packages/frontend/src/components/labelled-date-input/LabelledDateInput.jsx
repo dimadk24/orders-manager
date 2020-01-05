@@ -24,6 +24,11 @@ const LabelledDateInput = ({ name, ...props }) => (
             convertReactDateTimeValueToFormikFormat(name, value)
           )
         }
+        onBlur={(value) =>
+          inputProps.onBlur(
+            convertReactDateTimeValueToFormikFormat(name, value)
+          )
+        }
       />
     )}
     {...props}
