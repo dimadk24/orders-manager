@@ -4,15 +4,15 @@ import { useFormikContext } from 'formik'
 import { getOrdersCount } from '../pages/add-order-page/addOrderPage_service'
 
 const OrderIdField = () => {
-  const { setFieldValue } = useFormikContext()
+  const { setFieldValue, values } = useFormikContext()
   useEffect(() => {
     const loadOrderId = async () => {
       const ordersCount = await getOrdersCount()
       const newOrderId = ordersCount + 1
       setFieldValue('id', newOrderId)
     }
-    loadOrderId()
-  }, [setFieldValue])
+    if (!values.id) loadOrderId()
+  }, [setFieldValue, values.id])
   return (
     <LabelledField
       name="id"
