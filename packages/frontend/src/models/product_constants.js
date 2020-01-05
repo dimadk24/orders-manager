@@ -13,10 +13,18 @@ const mockProductTypes = [
   { id: 7, value: 'полотенце' },
 ]
 
+const EMPTY_OPTION = {
+  value: '',
+  text: 'Выбрать',
+}
+
 const mockProductParameters = [
   {
-    name: 'размер',
+    name: 'size',
+    label: 'размер',
+    value: '',
     options: [
+      EMPTY_OPTION,
       {
         text: 'M',
         value: 'M',
@@ -28,8 +36,11 @@ const mockProductParameters = [
     ],
   },
   {
-    name: 'материал',
+    name: 'material',
+    label: 'материал',
+    value: '',
     options: [
+      EMPTY_OPTION,
       {
         text: 'хлопок',
         value: 'хлопок',
@@ -41,8 +52,11 @@ const mockProductParameters = [
     ],
   },
   {
-    name: 'производитель',
+    name: 'manufacturer',
+    label: 'производитель',
+    value: '',
     options: [
+      EMPTY_OPTION,
       {
         text: 'беларусь',
         value: 'беларусь',
@@ -50,8 +64,11 @@ const mockProductParameters = [
     ],
   },
   {
-    name: 'плотность',
+    name: 'thickness',
+    label: 'плотность',
+    value: '',
     options: [
+      EMPTY_OPTION,
       {
         text: 'плотный',
         value: 'плотный',
@@ -59,8 +76,11 @@ const mockProductParameters = [
     ],
   },
   {
-    name: 'тип',
+    name: 'type',
+    label: 'тип',
+    value: '',
     options: [
+      EMPTY_OPTION,
       {
         text: 'важный',
         value: 'важный',

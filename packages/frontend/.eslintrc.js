@@ -3,7 +3,6 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['plugin:react-redux/recommended'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

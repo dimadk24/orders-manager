@@ -6,9 +6,11 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'airbnb',
-    'plugin:prettier/recommended',
+    'react-app',
+    'plugin:react-redux/recommended',
     'plugin:jest/recommended',
     'plugin:jest-formatting/recommended',
+    'plugin:prettier/recommended',
   ],
   globals: {
     Atomics: 'readonly',

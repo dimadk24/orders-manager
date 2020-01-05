@@ -7,27 +7,28 @@ import ProductTypeButton from './product-type-button'
 import Button from '../button'
 import ProductParameter from './product-parameter'
 import ProductOption from './product-option'
-import { FieldArray } from 'formik'
+import { FieldArray, useFormikContext } from 'formik'
 import { createProductName } from '../../models/product_utils'
-import { OPTIONS_MODES } from '../../models/product_constants'
+import {
+  mockProductParameters,
+  OPTIONS_MODES,
+} from '../../models/product_constants'
 
-function Product({
-  onRemove,
-  types,
-  index,
-  onChooseProductType,
-  optionsMode,
-  parameters,
-  formValues,
-}) {
+function Product({ onRemove, types, index, onChooseProductType, optionsMode }) {
   const productFormPath = `products[${index}]`
+  const { setFieldValue, values } = useFormikContext()
+  const productValues = values.products[index]
 
   const getTypesBlock = () => (
     <section className="product__types">
       {types.map(({ id, value }) => (
         <ProductTypeButton
           key={id}
-          onClick={() => onChooseProductType({ id, value })}
+          onClick={() => {
+            const path = `${productFormPath}.parameters`
+            setFieldValue(path, mockProductParameters)
+            onChooseProductType({ id, value })
+          }}
         >
           {value}
         </ProductTypeButton>
@@ -38,19 +39,25 @@ function Product({
   const getParametersBlock = () => (
     <section className="product__parameters">
       <FieldArray name={`${productFormPath}.parameters`}>
-        {({ push, replace }) => {
+        {({ replace }) => {
+          const { parameters } = productValues
           const onChooseParameter = ({ name, value }) => {
-            const foundItemIndex = formValues.parameters.findIndex(
+            const foundItemIndex = parameters.findIndex(
               (parameter) => parameter.name === name
             )
-            if (foundItemIndex === -1) push({ name, value })
-            else replace(foundItemIndex, { name, value })
+            if (foundItemIndex === -1)
+              throw new Error('404 parameter not found')
+            else {
+              const foundParameter = parameters[foundItemIndex]
+              replace(foundItemIndex, { ...foundParameter, value })
+            }
           }
 
           return parameters.map((parameter) => (
             <ProductParameter
+              value={parameter.value}
               options={parameter.options}
-              label={parameter.name}
+              label={parameter.label}
               key={parameter.name}
               onChange={(value) =>
                 onChooseParameter({ name: parameter.name, value })
@@ -73,8 +80,8 @@ function Product({
         label="Имя товара"
         inputClassName="product__name-input"
         value={createProductName({
-          type: formValues.type,
-          parameters: formValues.parameters,
+          type: productValues.type,
+          parameters: productValues.parameters,
         })}
         disabled
         centered
@@ -125,16 +132,7 @@ Product.propTypes = {
   ),
   onChooseProductType: PropTypes.func,
   optionsMode: PropTypes.oneOf([OPTIONS_MODES.TYPES, OPTIONS_MODES.PARAMETERS]),
-  parameters: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      options: ProductParameter.propTypes.options,
-    })
-  ),
   // eslint-disable-next-line react/forbid-prop-types
-  formValues: PropTypes.object, // product Formik object
-  // See createProduct function in product_model.js
-  // and initialValues passed to Formik in the page
 }
 
 Product.defaultProps = {
@@ -142,14 +140,6 @@ Product.defaultProps = {
   types: [],
   onChooseProductType: () => {},
   optionsMode: OPTIONS_MODES.TYPES,
-  parameters: [],
-  formValues: {
-    type: {
-      id: 0,
-      value: '',
-    },
-    parameters: [],
-  },
 }
 
 export default Product

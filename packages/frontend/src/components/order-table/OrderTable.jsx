@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import './OrderTable.css'
+import { navigate } from '@reach/router'
 
 export default function OrderTable({ rows }) {
   return rows.length ? (
@@ -21,7 +22,10 @@ export default function OrderTable({ rows }) {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow
+              key={row.id}
+              onClick={() => navigate(`/clients/1/orders/${row.id}`)}
+            >
               <TableCell align="center">{row.id}</TableCell>
               <TableCell align="center">{row.mainPhone}</TableCell>
               <TableCell align="center">{row.address.streetName}</TableCell>

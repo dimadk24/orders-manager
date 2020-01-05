@@ -8,9 +8,14 @@ describe('Product', () => {
   const container = document.createElement('div')
   document.body.appendChild(container)
 
-  function render(props) {
+  function render(props, formValues) {
     ReactDOM.render(
-      <Formik onSubmit={() => {}} initialValues={{}}>
+      <Formik
+        onSubmit={() => {}}
+        initialValues={
+          formValues || { products: [{}, { type: {}, parameters: [] }] }
+        }
+      >
         <Product index={1} {...props} />
       </Formik>,
       container
@@ -74,6 +79,8 @@ describe('Product', () => {
     const parameters = [
       {
         name: 'size',
+        label: 'size',
+        value: '',
         options: [
           {
             text: 'L',
@@ -83,6 +90,8 @@ describe('Product', () => {
       },
       {
         name: 'material',
+        label: 'material',
+        value: '',
         options: [
           {
             text: 'cotton',
@@ -95,10 +104,12 @@ describe('Product', () => {
         ],
       },
     ]
-    render({
-      optionsMode: OPTIONS_MODES.PARAMETERS,
-      parameters,
-    })
+    render(
+      {
+        optionsMode: OPTIONS_MODES.PARAMETERS,
+      },
+      { products: [{}, { type: {}, parameters }] }
+    )
     const parameterElements = querySelectorAll('.product__parameters > *')
     expect(parameterElements).toHaveLength(2)
   })
