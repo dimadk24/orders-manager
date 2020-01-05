@@ -27,7 +27,12 @@ const AddOrderPage = () => {
     },
     comment: '',
   }
-  return <Order formInitialValues={formInitialValues} />
+  return (
+    <Order
+      formInitialValues={formInitialValues}
+      idFieldLabel="Добавить заказ №"
+    />
+  )
 }
 
 export default AddOrderPage

@@ -71,7 +71,7 @@ const getProductsBlock = ({ products, setFieldValue, isLoading }) => (
 )
 /* eslint-enable react/prop-types */
 
-const Order = ({ formInitialValues }) => {
+const Order = ({ formInitialValues, idFieldLabel }) => {
   return (
     <Formik
       initialValues={formInitialValues}
@@ -92,7 +92,7 @@ const Order = ({ formInitialValues }) => {
         return (
           <>
             <h1 className="order-id-wrapper">
-              <OrderIdField />
+              <OrderIdField label={idFieldLabel} />
             </h1>
             <main>
               <Form className="form-wrapper">
@@ -146,6 +146,11 @@ Order.propTypes = {
       entrance: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  idFieldLabel: PropTypes.string,
+}
+
+Order.defaultProps = {
+  idFieldLabel: '',
 }
 
 export default Order

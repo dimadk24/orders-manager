@@ -20,7 +20,11 @@ const OrderPage = ({ clientId, orderId }) => {
     }
     loadOrderData()
   }, [orderId])
-  return loaded ? <Order formInitialValues={formInitialValues} /> : <Loader />
+  return loaded ? (
+    <Order formInitialValues={formInitialValues} idFieldLabel="Заказ №" />
+  ) : (
+    <Loader />
+  )
 }
 
 OrderPage.propTypes = {

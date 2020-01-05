@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import LabelledField from '../labelled-field/LabelledField'
 import { useFormikContext } from 'formik'
 import { getOrdersCount } from '../pages/add-order-page/addOrderPage_service'
+import PropTypes from 'prop-types'
 
-const OrderIdField = () => {
+const OrderIdField = ({ label }) => {
   const { setFieldValue, values } = useFormikContext()
   useEffect(() => {
     const loadOrderId = async () => {
@@ -16,12 +17,20 @@ const OrderIdField = () => {
   return (
     <LabelledField
       name="id"
-      label="Добавить заказ №"
+      label={label}
       type="number"
       inputClassName="order-id-input"
       centered
     />
   )
+}
+
+OrderIdField.propTypes = {
+  label: PropTypes.string,
+}
+
+OrderIdField.defaultProps = {
+  label: '',
 }
 
 export default OrderIdField
