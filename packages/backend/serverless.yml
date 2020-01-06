@@ -74,6 +74,15 @@ functions:
           cors:
             origin: '*'
             allowCredentials: true
+  product-type-create:
+    handler: src/product-type-create_handler.handler
+    events:
+      - http:
+          path: /product-types/create
+          method: post
+          cors:
+            origin: '*'
+            allowCredentials: true
 
 plugins:
   - serverless-offline-ssm
